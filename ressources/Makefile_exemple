@@ -1,0 +1,14 @@
+.PHONY: all clean
+CC = gcc
+CFLAGS = -Wall -std=c99
+#LDFLAGS = -lm -lgmp
+TARGET = vote # nom de l'exécutable
+OBJFILES = tous_vos_fichiers.o
+
+all: $(TARGET)
+
+$(TARGET): $(OBJFILES)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS)
+
+clean:
+	rm -f $(OBJFILES) $(TARGET) *~
