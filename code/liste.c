@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "global.h"
-#include "elementliste.h"
-#include "liste.h"
+#include "fichiers_h/global.h"
+#include "fichiers_h/elementliste.h"
+#include "fichiers_h/liste.h"
 
 void createList(liste *p){
 /// \brief Création d'une liste

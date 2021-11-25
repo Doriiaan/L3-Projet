@@ -1,4 +1,4 @@
-#include "global.h"
+#include "fichiers_h/global.h"
 
 
 // Je crois que ça affiche un *message d'erreur sur stderr

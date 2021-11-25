@@ -43,7 +43,7 @@ typedef struct s_mat_dyn{
   int ** tab;
   int nbRows;
   int nbCol;
-} t_mat_int_d;
+} t_mat_int_dyn;
 
 /// \struct idem avec des chaînes de caractères
 typedef struct s_mat_char_dyn{

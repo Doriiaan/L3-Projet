@@ -4,8 +4,8 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "global.h"
-#include "elementliste.h"
+#include "fichiers_h/global.h"
+#include "fichiers_h/elementliste.h"
 
 void afficher_element(Elementliste e,FILE *fp){
   fprintf(fp,"(%d, %d, %d)\n", e.orig,e.dest,e.poids);
