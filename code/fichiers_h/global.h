@@ -75,14 +75,7 @@ void affiche_resultat(FILE *outfp,char * scrutin,int nbCandidats, int nbVotants 
 void erreur(char *message);
 int * creer_tab_int(int dim);
 int ** creer_mat_int(int nbRows,int nbCol);
-//void affiche_tab_int(int *tab,int dim, FILE *outfp);
-//
-void creer_t_mat_int_dyn(t_mat_int_dyn *stTab,int nbRows,int nbCol);
-void creer_t_tab_int_dyn(t_tab_int_dyn *stTab,int dim);
-void creer_t_mat_char_dyn(t_mat_char_star_dyn * s_tabmots);
-//void affiche_t_tab_int_dyn(t_tab_int_dyn t_tab, FILE *outfp);
-void affiche_t_mat_char_star_dyn(t_mat_char_star_dyn t_tabmots, FILE *outfp);
-void affiche_t_mat_int_dyn(t_mat_int_dyn t_tab, FILE *outfp);
+void affiche_tab_int(int *tab,int dim, FILE *outfp);
 void affiche_mat_int(int **duels_mat,int nbRows,int nbCol,FILE *outfp);
 void init_tab_int(int *tab,int dim,int valeur);
 void init_mat_int(int **mat,int nbRows,int nbCol,int valeur);
@@ -90,6 +83,13 @@ int min_borne(char * tab[],int dim,int borne);
 int max_tab_indice(int *tab, int dim);
 int min_tab_indice_non_j(int *tab, int dim,int j);
 int som_tab_indice(int *tab, int dim);
+//
+void creer_t_mat_int_dyn(t_mat_int_dyn *stTab,int nbRows,int nbCol);
+void creer_t_tab_int_dyn(t_tab_int_dyn *stTab,int dim);
+void creer_t_mat_char_dyn(t_mat_char_star_dyn * s_tabmots);
+void affiche_t_tab_int_dyn(t_tab_int_dyn t_tab, FILE *outfp);
+void affiche_t_mat_char_star_dyn(t_mat_char_star_dyn t_tabmots, FILE *outfp);
+void affiche_t_mat_int_dyn(t_mat_int_dyn t_tab, FILE *outfp);
 //
 // lecture_fich_csv
 void read_voting_file(char * filename,char *delimiteur,t_mat_char_star_dyn *t_tabmots);
