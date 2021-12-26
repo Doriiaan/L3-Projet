@@ -13,7 +13,7 @@ void erreur(char *message){
 //Utile pour créer les tab dans les structures
 int * creer_tab_int(int dim){
 
-  int *tableau = malloc(dim*sizeof(int));
+  int *tableau = (int*) malloc(dim*sizeof(int));
   if(tableau == NULL){
     exit(1);
   }
@@ -24,13 +24,13 @@ int * creer_tab_int(int dim){
 // Utile pour créer les mat dans les structures
 int ** creer_mat_int(int nbRows,int nbCol){
 
-  int** matrice = malloc(nbRows*sizeof(int));
+  int** matrice = (int**) malloc(nbRows*sizeof(int*));
 
   if(matrice == NULL){
     exit(1);
   }
   for (int i = 0; i < nbRows; i++) {
-    matrice[i] = malloc(nbCol*sizeof(int));
+    matrice[i] = (int*) malloc(nbCol*sizeof(int));
     if(matrice == NULL){
       exit(1);
     }
@@ -130,32 +130,31 @@ void creer_t_mat_int_dyn(t_mat_int_dyn *stTab,int nbRows,int nbCol){
 // creer mat dynamique de chaine
 void creer_t_mat_char_dyn(t_mat_char_star_dyn * s_tabmots){
 
-  char *** mat = malloc(sizeof(char));
-  * mat[0] = malloc(MAX*sizeof(char));
-  for (int i = 0; i < MAX; i++) {
-    mat[0][i] = malloc(LONGMOTS*sizeof(char));
-  }
+  char *** mat = (char***) malloc(sizeof(char**));
+  mat[0] = (char **)malloc(sizeof(char*));
+  mat[0][0] = (char*) malloc(LONGMOTS*sizeof(char));
+
   s_tabmots->tab = mat;
   s_tabmots->nbRows = 1;
-  s_tabmots-> nbCol = MAX;
-  s_tabmots->offset;
+  s_tabmots->nbCol = 1;
+  s_tabmots->offset = 4;
 }
 
 // affiche la matrice structure dans l'output, un fichier
 void affiche_t_mat_char_star_dyn(t_mat_char_star_dyn t_tabmots, FILE *outfp){
   for (int i = 0; i < t_tabmots.nbRows; i++) {
     for (int y = 0; y < t_tabmots.nbCol; y++) {
-      fprintf(outfp, "%s ", t_tabmots.tab[i][y]);
+      printf("%s ", t_tabmots.tab[i][y]);
     }
-    fprintf(outfp, "\n");
+    printf("\n");
   }
 }
 
 // affiche la matrice structure dans l'output, un fichier
 void affiche_t_mat_int_dyn(t_mat_int_dyn t_tab, FILE *outfp){
 
-  for (int i = 0; i < t_tab.nbRows; i++) {
-    for (int y = 0; y < t_tab.nbCol; y++) {
+  for (int i = 0; i < t_tab.nbRows-1; i++) {
+    for (int y = 0; y < t_tab.nbCol-1; y++) {
       fprintf(outfp, "%d ", t_tab.tab[i][y]);
     }
     fprintf(outfp, "\n");
