@@ -102,8 +102,7 @@ int construct_data_struct(t_mat_char_star_dyn *tabmots, t_tab_int_dyn *first_arr
 void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,int nbCandidats,FILE *outfp);
 //
 // condorcet.c
-void uninominal_un_tour(t_tab_int_dyn first_array,t_mat_char_star_dyn tabmots,FILE *outfp);
-void uninominal_deux_tours(t_tab_int_dyn first_array,t_mat_int_dyn duels_mat,t_mat_char_star_dyn tabmots,FILE *outfp);
+
 //int condorcet_paires(liste larcs,FILE *outfp);
 //
 // minimax

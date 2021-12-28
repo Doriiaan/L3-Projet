@@ -2,8 +2,6 @@
 #include <stddef.h>
 
 
-
-// Je crois que ça affiche un *message d'erreur sur stderr
 void erreur(char *message){
 
   printf("%s\n", message);
@@ -83,7 +81,7 @@ int min_borne(char * tab[],int dim,int borne){
 //Indice du max
 int max_tab_indice(int *tab, int dim){
   int imax = 0;
-  for (int i = 0; i < dim; i++) {
+  for (int i = 1; i < dim; i++) {
     if(tab[i] > tab[imax])
       imax = i;
   }
@@ -167,4 +165,24 @@ void affiche_t_tab_int_dyn(t_tab_int_dyn t_tab, FILE *outfp){
       fprintf(outfp, "%d ", t_tab.tab[i]);
     }
     fprintf(outfp, "\n");
+}
+
+void copier_chaine_char(char const *source, char *destination){
+  while(sizeof(destination) < sizeof(source))
+    destination = (char*) realloc(destination, sizeof(destination)+1*sizeof(char));
+  int i = 0;
+  for (i; source[i] != '\0'; i++) {
+    destination[i] = source[i];
+  }
+  destination[i] = '\0';
+}
+
+int comparer_chaine_char(char const *source1, char const* source2){
+  if (sizeof(source1) != sizeof(source2))
+    return 0;
+  for (int i = 0; source1[i] != '\0' && source2[i] != '\0'; i++){
+    if(source1[i] != source2[i])
+      return 0;
+  }
+  return 1;
 }

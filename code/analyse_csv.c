@@ -1,4 +1,5 @@
 #include "fichiers_h/global.h"
+#include "fichiers_h/utils.h"
 
 // Va lire le tableur et mettre les infos dans une matrice t_mat_char_star_dyn (pour −i et −d).
 
@@ -43,9 +44,7 @@ void read_voting_file(char * filename,char *delimiteur,t_mat_char_star_dyn *t_ta
     char * mot = strtok(ligne, delimiteur);
     y = 0;
     while (mot != NULL) {
-      for (z = 0; z < mot[z] != '\0'; z++) {
-        t_tabmots->tab[i][y][z] = mot[z];
-      }
+      copier_chaine_char(mot, t_tabmots->tab[i][y]);
       y++;
       mot = strtok(NULL, delimiteur);
     }

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "fichiers_h/global.h"
+#include "fichiers_h/utils_scrutins.h"
 
 void copier_chaine_char(char const *source, char* destination);
 int comparer_chaine_char(char const *source1, char const* source2);
@@ -11,8 +12,9 @@ int main(int argc, char const *argv[]) {
   int methode[NB_METHODES] = {0, 0, 0, 0, 0}; //1 si la methode est demande, 0 sinon
   FILE* output = stdout;
   FILE* fichier_csv;
+  char nom_fichier_csv[100];
 
-  if(argc <= 7){
+  if(argc <= 7 && argc >= 5){
 
     //compte les options
     for (int i_opt = 1; i_opt < argc; i_opt++) { //boucle des options
@@ -26,6 +28,8 @@ int main(int argc, char const *argv[]) {
         fichier_csv = fopen(argv[i_opt+1], "r");
         if(fichier_csv == NULL)
           erreur("Le fichier csv n'est pas accessible\nUtilisation: ./vote -i,-d fichier_csv -m methode [-o log.txt]\n");
+        fclose(fichier_csv);
+        copier_chaine_char(argv[i_opt+1], nom_fichier_csv);
         options[0] = 1;
       }
 
@@ -38,6 +42,8 @@ int main(int argc, char const *argv[]) {
         fichier_csv = fopen(argv[i_opt+1], "r");
         if(fichier_csv == NULL)
           erreur("Le fichier csv n'est pas accessible\nUtilisation: ./vote -i,-d fichier_csv -m methode [-o log.txt]\n");
+        fclose(fichier_csv);
+        copier_chaine_char(argv[i_opt+1], nom_fichier_csv);
         options[1] = 1;
       }
 
@@ -95,36 +101,17 @@ int main(int argc, char const *argv[]) {
 
   }
   else // si trop d'arguments STOP
-    erreur("Trop d'arguments\nUtilisation: ./vote -i,-d fichier_csv -m methode [-o log.txt]\n");
+    erreur("Il n'y a pas le bon nombre d'arguments\nUtilisation: ./vote -i,-d fichier_csv -m methode [-o log.txt]\n");
 
   // SUITE ---------------------------------------------------------------------
 
 
-
+  t_mat_char_star_dyn t_tabmots;
+  creer_t_mat_char_dyn(&t_tabmots);
+  read_voting_file(nom_fichier_csv,"\n,",&t_tabmots);
+  uninominal_un_tour(t_tabmots, output);
 
   if (options[2] == 1)
     fclose(output);
-  fclose(fichier_csv);
   return 0;
-}
-
-
-// FONCTIONS ANNEXES------------------------------------------------------------
-
-void copier_chaine_char(char const *source, char *destination){
-  if(sizeof(destination) < sizeof(source))
-    exit(EXIT_FAILURE);
-  for (int i = 0; source[i] != '\0'; i++) {
-    destination[i] = source[i];
-  }
-}
-
-int comparer_chaine_char(char const *source1, char const* source2){
-  if (sizeof(source1) != sizeof(source2))
-    return 0;
-  for (int i = 0; source1[i] != '\0' && source2[i] != '\0'; i++){
-    if(source1[i] != source2[i])
-      return 0;
-  }
-  return 1;
 }
