@@ -106,10 +106,18 @@ int main(int argc, char const *argv[]) {
   // SUITE ---------------------------------------------------------------------
 
 
+  //creation matrice tableau csv
   t_mat_char_star_dyn t_tabmots;
   creer_t_mat_char_dyn(&t_tabmots);
   read_voting_file(nom_fichier_csv,"\n,",&t_tabmots);
-  uninominal_un_tour(t_tabmots, output);
+  int nombreCandidat = t_tabmots.nbCol-t_tabmots.offset;
+
+  //creation tableau des votes par candidats
+  t_tab_int_dyn vote_par_candidat = creer_vote_par_candidat(t_tabmots, nombreCandidat);
+  //creation matrice des duels
+  t_mat_int_dyn duels_mat;
+  construct_mat_duels_d(t_tabmots, &duels_mat, nombreCandidat, stdout);
+  uninominal_deux_tours(vote_par_candidat, duels_mat, t_tabmots, stdout);
 
   if (options[2] == 1)
     fclose(output);

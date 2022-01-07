@@ -1,4 +1,5 @@
 #include "fichiers_h/global.h"
+#include "fichiers_h/utils.h"
 #include <stddef.h>
 
 
@@ -127,7 +128,6 @@ void creer_t_mat_int_dyn(t_mat_int_dyn *stTab,int nbRows,int nbCol){
 //[[""], [""], [""]]
 // creer mat dynamique de chaine
 void creer_t_mat_char_dyn(t_mat_char_star_dyn * s_tabmots){
-
   char *** mat = (char***) malloc(sizeof(char**));
   mat[0] = (char **)malloc(sizeof(char*));
   mat[0][0] = (char*) malloc(LONGMOTS*sizeof(char));
@@ -140,9 +140,10 @@ void creer_t_mat_char_dyn(t_mat_char_star_dyn * s_tabmots){
 
 // affiche la matrice structure dans l'output, un fichier
 void affiche_t_mat_char_star_dyn(t_mat_char_star_dyn t_tabmots, FILE *outfp){
+
   for (int i = 0; i < t_tabmots.nbRows; i++) {
     for (int y = 0; y < t_tabmots.nbCol; y++) {
-      printf("%s ", t_tabmots.tab[i][y]);
+      printf("%s, ", t_tabmots.tab[i][y]);
     }
     printf("\n");
   }
@@ -150,9 +151,8 @@ void affiche_t_mat_char_star_dyn(t_mat_char_star_dyn t_tabmots, FILE *outfp){
 
 // affiche la matrice structure dans l'output, un fichier
 void affiche_t_mat_int_dyn(t_mat_int_dyn t_tab, FILE *outfp){
-
-  for (int i = 0; i < t_tab.nbRows-1; i++) {
-    for (int y = 0; y < t_tab.nbCol-1; y++) {
+  for (int i = 0; i < t_tab.nbRows; i++) {
+    for (int y = 0; y < t_tab.nbCol; y++) {
       fprintf(outfp, "%d ", t_tab.tab[i][y]);
     }
     fprintf(outfp, "\n");
@@ -168,8 +168,8 @@ void affiche_t_tab_int_dyn(t_tab_int_dyn t_tab, FILE *outfp){
 }
 
 void copier_chaine_char(char const *source, char *destination){
-  while(sizeof(destination) < sizeof(source))
-    destination = (char*) realloc(destination, sizeof(destination)+1*sizeof(char));
+  if (sizeof(destination) < sizeof(source))
+    destination = (char*) realloc(destination, sizeof(source));
   int i = 0;
   for (i; source[i] != '\0'; i++) {
     destination[i] = source[i];

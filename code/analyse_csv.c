@@ -21,6 +21,7 @@ void read_voting_file(char * filename,char *delimiteur,t_mat_char_star_dyn *t_ta
     while (mot != NULL) { //tant que les mots existent dans la lignes
         nb_colonnes++;
         mot = strtok(NULL, delimiteur);
+
     }
   }
 

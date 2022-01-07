@@ -22,7 +22,7 @@
 #define ERR -2
 
 
-#define MAX 300 /// \def< longueur maximale de la ligne dans le fichier
+#define MAX 500 /// \def< longueur maximale de la ligne dans le fichier
 #define MAXINT 1000 /// \def< entier max utile dans le programme
 #define LONGMOTS 30 /// \def< longueur max d'une chaîne de caractères
 #define NBCOLADM 3 /// \def< nb de colonnes administratives avant la colonne du premier choix
@@ -102,6 +102,8 @@ int construct_data_struct(t_mat_char_star_dyn *tabmots, t_tab_int_dyn *first_arr
 void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,int nbCandidats,FILE *outfp);
 //
 // condorcet.c
+//void uninominal_un_tour(t_tab_int_dyn first_array,t_mat_char_star_dyn tabmots,FILE *outfp);
+//void uninominal_deux_tours(t_tab_int_dyn first_array,t_mat_int_dyn duels_mat,t_mat_char_star_dyn tabmots,FILE *outfp);
 
 //int condorcet_paires(liste larcs,FILE *outfp);
 //
