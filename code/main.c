@@ -12,7 +12,7 @@ int main(int argc, char const *argv[]) {
   int methode[NB_METHODES] = {0, 0, 0, 0, 0}; //1 si la methode est demande, 0 sinon
   FILE* output = stdout;
   FILE* fichier_csv;
-  char nom_fichier_csv[100];
+  char nom_fichier_csv[200];
 
   if(argc <= 7 && argc >= 5){
 
@@ -114,10 +114,19 @@ int main(int argc, char const *argv[]) {
 
   //creation tableau des votes par candidats
   t_tab_int_dyn vote_par_candidat = creer_vote_par_candidat(t_tabmots, nombreCandidat);
+
   //creation matrice des duels
   t_mat_int_dyn duels_mat;
   construct_mat_duels_d(t_tabmots, &duels_mat, nombreCandidat, stdout);
-  uninominal_deux_tours(vote_par_candidat, duels_mat, t_tabmots, stdout);
+
+  //creation liste arc
+  liste liste_arc;
+  int nombreSommet = 0;
+  createList(&liste_arc);
+  creer_liste_arc(&liste_arc, duels_mat);
+
+
+
 
   if (options[2] == 1)
     fclose(output);

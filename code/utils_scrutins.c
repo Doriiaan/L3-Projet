@@ -1,6 +1,70 @@
 #include "fichiers_h/global.h"
 #include "fichiers_h/utils.h"
 
+
+/*
+struct liste {
+    Elementliste Tabliste[DIMMAX];
+    int Tete;
+    int nbElt;
+};
+
+typedef struct s_arc_p{ /// arc pondéré = arc de préférence
+  int orig;
+  int dest;
+  int poids;
+} t_arc_p;
+
+
+*/
+int vainqueurCondorcet(liste larcs, int nbSommets){
+
+  int vainqueur = -1;
+
+  int x = larcs.Tabliste[0].orig; //sommet actuel
+  int nombre_victoire = 1;
+
+  int i_arc = 1;
+  while (i_arc < nbEltList(larcs) && nombre_victoire != nbSommets-1) {
+    if(larcs.Tabliste[i_arc].orig == x){
+      nombre_victoire++;
+    }
+    else{
+      x = larcs.Tabliste[i_arc].orig;
+      nombre_victoire = 1;
+    }
+    i_arc++;
+  }
+  if(nombre_victoire == nbSommets-1){
+    vainqueur = x;
+    return vainqueur;
+  }
+  return vainqueur;
+}
+
+
+int creer_liste_arc(liste *liste_arc, t_mat_int_dyn duels_mat){
+
+  Elementliste arc;
+  Elementliste arc_inverse;
+  // x -> y
+  for (int x = 0; x < duels_mat.nbRows; x++) {
+    for (int y = 0; y < duels_mat.nbCol; y++) {
+      if(x != y){
+        arc.orig = x;
+        arc.dest = y;
+        arc.poids = duels_mat.tab[x][y];
+        arc_inverse.orig = y;
+        arc_inverse.dest = x;
+        arc_inverse.poids = duels_mat.tab[y][x];
+        if(duels_mat.tab[x][y] >= duels_mat.tab[y][x] && !belongEltList(*liste_arc, arc_inverse)){
+          addTailList(liste_arc, arc);
+        }
+      }
+    }
+  }
+}
+
 void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,int nbCandidats,FILE *outfp){
 
   creer_t_mat_int_dyn(duels_mat, nbCandidats, nbCandidats);
@@ -22,9 +86,6 @@ void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,
       }
     }
   }
-  fprintf(outfp, "\n-----MATRICE DES DUELS-----\n\n");
-  affiche_t_mat_int_dyn(*duels_mat, stdout);
-  fprintf(outfp, "\n");
 }
 
 
@@ -59,6 +120,4 @@ void affiche_resultat(FILE *outfp, char * scrutin, int nbCandidats, int nbVotant
   if(comparer_chaine_char(scrutin, "uni2 tour2")){
     fprintf(outfp, "Mode de scrutin : uninominale à deux tours, tour 2, %d candidats, %d votants, vainqueur = %s, score = %f%\n", nbCandidats, nbVotants, vainqueur, score);
   }
-
-
 }

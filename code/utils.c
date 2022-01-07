@@ -135,7 +135,7 @@ void creer_t_mat_char_dyn(t_mat_char_star_dyn * s_tabmots){
   s_tabmots->tab = mat;
   s_tabmots->nbRows = 1;
   s_tabmots->nbCol = 1;
-  s_tabmots->offset = 4;
+  s_tabmots->offset = NBCOLADM+1;
 }
 
 // affiche la matrice structure dans l'output, un fichier
