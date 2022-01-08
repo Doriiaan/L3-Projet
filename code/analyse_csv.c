@@ -45,7 +45,13 @@ void read_voting_file(char * filename,char *delimiteur,t_mat_char_star_dyn *t_ta
     char * mot = strtok(ligne, delimiteur);
     y = 0;
     while (mot != NULL) {
+      int taille = LONGMOTS;
+      while(strlen(mot) > taille){
+        taille *= 2;
+        t_tabmots->tab[i][y] = (char*) realloc(t_tabmots->tab[i][y], taille*sizeof(char));
+      }
       copier_chaine_char(mot, t_tabmots->tab[i][y]);
+
       y++;
       mot = strtok(NULL, delimiteur);
     }

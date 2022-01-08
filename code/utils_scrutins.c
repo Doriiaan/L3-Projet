@@ -88,6 +88,17 @@ void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,
   }
 }
 
+void copie_tabmots_duels_mat(t_mat_char_star_dyn tabmots, t_mat_int_dyn *duels_mat, int nbCandidats){
+
+  creer_t_mat_int_dyn(duels_mat, nbCandidats, nbCandidats);
+
+  for (size_t x = 1; x < nbCandidats+1; x++) {
+    for (size_t y = 0; y < nbCandidats; y++) {
+      duels_mat->tab[x-1][y] = atoi(tabmots.tab[x][y]);
+    }
+  }
+}
+
 
 t_tab_int_dyn creer_vote_par_candidat(t_mat_char_star_dyn tabmots, int nombreCandidat){
 

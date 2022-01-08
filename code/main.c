@@ -108,22 +108,49 @@ int main(int argc, char const *argv[]) {
 
   //creation matrice tableau csv
   t_mat_char_star_dyn t_tabmots;
+  t_mat_int_dyn duels_mat;
+  liste liste_arc;
+  int nombreCandidat = 0;
+  int nombreVotant = 0;
+
   creer_t_mat_char_dyn(&t_tabmots);
   read_voting_file(nom_fichier_csv,"\n,",&t_tabmots);
-  int nombreCandidat = t_tabmots.nbCol-t_tabmots.offset;
 
-  //creation tableau des votes par candidats
-  t_tab_int_dyn vote_par_candidat = creer_vote_par_candidat(t_tabmots, nombreCandidat);
-
-  //creation matrice des duels
-  t_mat_int_dyn duels_mat;
-  construct_mat_duels_d(t_tabmots, &duels_mat, nombreCandidat, stdout);
-
-  //creation liste arc
-  liste liste_arc;
-  int nombreSommet = 0;
   createList(&liste_arc);
-  creer_liste_arc(&liste_arc, duels_mat);
+
+  if(options[0] == 1){ // -i
+    nombreVotant = t_tabmots.nbRows -1;
+    nombreCandidat = t_tabmots.nbCol-t_tabmots.offset;
+    t_tab_int_dyn vote_par_candidat = creer_vote_par_candidat(t_tabmots, nombreCandidat); //creer le nombre de vote par candidat
+    construct_mat_duels_d(t_tabmots, &duels_mat, nombreCandidat, stdout); //creer la matrice des duels
+    creer_liste_arc(&liste_arc, duels_mat); //creer la liste des arcs
+
+    //methode minimax
+    if(methode[2] == 1 || methode[4] == 1){
+      int indice_vainqueur = minimax(duels_mat,liste_arc, nombreCandidat,stdout);
+      char *nom_vainqueur = (char *) malloc(LONGMOTS*sizeof(char));
+      copier_chaine_char(t_tabmots.tab[0][indice_vainqueur+t_tabmots.offset], nom_vainqueur);
+      fprintf(output, "Mode de scrutin : Condorcet minimax, %d candidats, %d votants, vainqueur = %s\n", nombreCandidat, nombreVotant, nom_vainqueur);
+    }
+  }
+
+  if(options[1] == 1){ // -d
+
+    t_tabmots.offset = 0; //ajuste le offset
+    nombreCandidat = t_tabmots.nbCol;
+    copie_tabmots_duels_mat(t_tabmots, &duels_mat, nombreCandidat); // creer la matrice des duels
+    nombreVotant = duels_mat.tab[0][1] + duels_mat.tab[1][0];
+    creer_liste_arc(&liste_arc, duels_mat); //creer la liste des arcs
+
+    //methode minimax
+    if(methode[2] == 1 || methode[4] == 1){
+      int indice_vainqueur = minimax(duels_mat,liste_arc, nombreCandidat,stdout);
+      char *nom_vainqueur = (char *) malloc(LONGMOTS*sizeof(char));
+      copier_chaine_char(t_tabmots.tab[0][indice_vainqueur+t_tabmots.offset], nom_vainqueur);
+      fprintf(output, "Mode de scrutin : Condorcet minimax, %d candidats, %d votants, vainqueur = %s\n", nombreCandidat, 100, nom_vainqueur);
+    }
+  }
+
 
 
 

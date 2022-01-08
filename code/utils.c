@@ -143,9 +143,9 @@ void affiche_t_mat_char_star_dyn(t_mat_char_star_dyn t_tabmots, FILE *outfp){
 
   for (int i = 0; i < t_tabmots.nbRows; i++) {
     for (int y = 0; y < t_tabmots.nbCol; y++) {
-      printf("%s, ", t_tabmots.tab[i][y]);
+      fprintf(outfp, "%s, ", t_tabmots.tab[i][y]);
     }
-    printf("\n");
+    fprintf(outfp, "\n");
   }
 }
 
@@ -168,9 +168,8 @@ void affiche_t_tab_int_dyn(t_tab_int_dyn t_tab, FILE *outfp){
 }
 
 void copier_chaine_char(char const *source, char *destination){
-  if (sizeof(destination) < sizeof(source))
-    destination = (char*) realloc(destination, sizeof(source));
-  int i = 0;
+
+  int i= 0;
   for (i; source[i] != '\0'; i++) {
     destination[i] = source[i];
   }

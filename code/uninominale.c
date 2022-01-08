@@ -13,6 +13,7 @@ void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tab
   float score = ((float)(vote_par_candidat.tab[indice_vainqueur]) / (float)(nombreVotant)) * 100;
   copier_chaine_char(tabmots.tab[0][indice_vainqueur+tabmots.offset], nom_vainqueur);
   affiche_resultat(outfp, "uni1", nombreCandidat, nombreVotant,  score, nom_vainqueur);
+  free(nom_vainqueur);
 }
 
 
@@ -50,5 +51,6 @@ void uninominal_deux_tours(t_tab_int_dyn vote_par_candidat, t_mat_int_dyn duels_
     float score_vainqueur = ((float)(duels_mat.tab[indice_vainqueur2][indice_vainqueur1]) / (float)(nombreVotant)) * 100;
     affiche_resultat(outfp, "uni2 tour2", nombreCandidat, nombreVotant,  score_vainqueur, nom_vainqueur2);
   }
-
+  free(nom_vainqueur1);
+  free(nom_vainqueur2);
 }

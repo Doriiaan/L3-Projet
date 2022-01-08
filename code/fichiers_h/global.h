@@ -108,7 +108,7 @@ void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,
 //int condorcet_paires(liste larcs,FILE *outfp);
 //
 // minimax
-int minimax(liste larcs, int nbSommets,FILE *outfp);
+//int minimax(liste larcs, int nbSommets,FILE *outfp);
 //
 // utils_scrutins.c
 int maxSommet(liste larcs);
