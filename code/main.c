@@ -105,53 +105,121 @@ int main(int argc, char const *argv[]) {
 
   // SUITE ---------------------------------------------------------------------
 
-
-  //creation matrice tableau csv
-  t_mat_char_star_dyn t_tabmots;
+  // VARIABLES
+  t_mat_char_star_dyn tabmots;
   t_mat_int_dyn duels_mat;
   liste liste_arc;
   int nombreCandidat = 0;
   int nombreVotant = 0;
 
-  creer_t_mat_char_dyn(&t_tabmots);
-  read_voting_file(nom_fichier_csv,"\n,",&t_tabmots);
+  creer_t_mat_char_dyn(&tabmots);
+  read_voting_file(nom_fichier_csv,"\n,",&tabmots);
 
   createList(&liste_arc);
 
+  // APPLIQUER LA METHODE EN FONCTION DES OPTIONS
   if(options[0] == 1){ // -i
-    nombreVotant = t_tabmots.nbRows -1;
-    nombreCandidat = t_tabmots.nbCol-t_tabmots.offset;
-    t_tab_int_dyn vote_par_candidat = creer_vote_par_candidat(t_tabmots, nombreCandidat); //creer le nombre de vote par candidat
-    construct_mat_duels_d(t_tabmots, &duels_mat, nombreCandidat, stdout); //creer la matrice des duels
-    creer_liste_arc(&liste_arc, duels_mat); //creer la liste des arcs
+    nombreVotant = tabmots.nbRows -1;
+    nombreCandidat = tabmots.nbCol-tabmots.offset;
+    t_tab_int_dyn vote_par_candidat = creer_vote_par_candidat(tabmots, nombreCandidat); //creer le nombre de vote par candidat
+    construct_mat_duels_d(tabmots, &duels_mat, nombreCandidat, stdout); //creer la matrice des duels
+    creer_liste_arc_etiquette(&liste_arc, duels_mat); //creer la liste des arcs etiquetté
+
+    //methode uninominale 1 tour
+    if(methode[0] == 1 || methode[4] == 1){
+      uninominal_un_tour(vote_par_candidat, tabmots, output);
+    }
+
+    //methode uninominale 2 tour
+    if(methode[1] == 1 || methode[4] == 1){
+      affiche_t_tab_int_dyn(vote_par_candidat, stdout);
+      uninominal_deux_tours(vote_par_candidat, duels_mat, tabmots, output);
+    }
 
     //methode minimax
     if(methode[2] == 1 || methode[4] == 1){
       int indice_vainqueur = minimax(duels_mat,liste_arc, nombreCandidat,stdout);
-      char *nom_vainqueur = (char *) malloc(LONGMOTS*sizeof(char));
-      copier_chaine_char(t_tabmots.tab[0][indice_vainqueur+t_tabmots.offset], nom_vainqueur);
-      fprintf(output, "Mode de scrutin : Condorcet minimax, %d candidats, %d votants, vainqueur = %s\n", nombreCandidat, nombreVotant, nom_vainqueur);
+
+      int taille = LONGMOTS;
+      char *nom_vainqueur = (char *) malloc(taille*sizeof(char));
+      while(strlen(tabmots.tab[0][indice_vainqueur+tabmots.offset]) > taille){
+        taille *= 2;
+        nom_vainqueur = (char*) realloc(nom_vainqueur, taille*sizeof(char));
+      }
+
+      copier_chaine_char(tabmots.tab[0][indice_vainqueur+tabmots.offset], nom_vainqueur);
+      fprintf(output, "Mode de scrutin : Condorcet minimax, %d candidats, %d votants, vainqueur = %s\n\n", nombreCandidat, nombreVotant, nom_vainqueur);
+    }
+
+    //methode schulze
+    if(methode[3] == 1 || methode[4] == 1){
+      t_tab_int_dyn liste_gagnants_schulzes;
+      creer_t_tab_int_dyn(&liste_gagnants_schulzes, nombreCandidat);
+      liste_gagnants_schulzes = schulze(duels_mat, liste_arc, nombreCandidat, stdout);
+
+
+      for (int i_gagnant = 0; i_gagnant < nombreCandidat; i_gagnant++) {
+        if(liste_gagnants_schulzes.tab[i_gagnant] == 1){
+
+          int taille = LONGMOTS;
+          char *nom_vainqueur = (char *) malloc(taille*sizeof(char));
+          while(strlen(tabmots.tab[0][i_gagnant+tabmots.offset]) > taille){
+            taille *= 2;
+            nom_vainqueur = (char*) realloc(nom_vainqueur, taille*sizeof(char));
+          }
+
+          copier_chaine_char(tabmots.tab[0][i_gagnant+tabmots.offset], nom_vainqueur);
+          fprintf(output, "Mode de scrutin : Condorcet schulze, %d candidats, %d votants, vainqueur = %s\n", nombreCandidat, nombreVotant, nom_vainqueur);
+        }
+      }
     }
   }
 
   if(options[1] == 1){ // -d
 
-    t_tabmots.offset = 0; //ajuste le offset
-    nombreCandidat = t_tabmots.nbCol;
-    copie_tabmots_duels_mat(t_tabmots, &duels_mat, nombreCandidat); // creer la matrice des duels
+    tabmots.offset = 0; //ajuste le offset
+    nombreCandidat = tabmots.nbCol;
+    copie_tabmots_duels_mat(tabmots, &duels_mat, nombreCandidat); // creer la matrice des duels
     nombreVotant = duels_mat.tab[0][1] + duels_mat.tab[1][0];
-    creer_liste_arc(&liste_arc, duels_mat); //creer la liste des arcs
+    creer_liste_arc_etiquette(&liste_arc, duels_mat); //creer la liste des arcs
 
     //methode minimax
     if(methode[2] == 1 || methode[4] == 1){
       int indice_vainqueur = minimax(duels_mat,liste_arc, nombreCandidat,stdout);
-      char *nom_vainqueur = (char *) malloc(LONGMOTS*sizeof(char));
-      copier_chaine_char(t_tabmots.tab[0][indice_vainqueur+t_tabmots.offset], nom_vainqueur);
-      fprintf(output, "Mode de scrutin : Condorcet minimax, %d candidats, %d votants, vainqueur = %s\n", nombreCandidat, 100, nom_vainqueur);
+
+      int taille = LONGMOTS;
+      char *nom_vainqueur = (char *) malloc(taille*sizeof(char));
+      while(strlen(tabmots.tab[0][indice_vainqueur+tabmots.offset]) > taille){
+        taille *= 2;
+        nom_vainqueur = (char*) realloc(nom_vainqueur, taille*sizeof(char));
+      }
+
+      copier_chaine_char(tabmots.tab[0][indice_vainqueur+tabmots.offset], nom_vainqueur);
+      fprintf(output, "Mode de scrutin : Condorcet minimax, %d candidats, %d votants, vainqueur = %s\n", nombreCandidat, nombreVotant, nom_vainqueur);
+    }
+
+    //methode schulze
+    if(methode[3] == 1 || methode[4] == 1){
+      t_tab_int_dyn liste_gagnants_schulzes;
+      creer_t_tab_int_dyn(&liste_gagnants_schulzes, nombreCandidat);
+      liste_gagnants_schulzes = schulze(duels_mat, liste_arc, nombreCandidat, stdout);
+
+      for (int i_gagnant = 0; i_gagnant < nombreCandidat; i_gagnant++) {
+        if(liste_gagnants_schulzes.tab[i_gagnant] == 1){
+
+          int taille = LONGMOTS;
+          char *nom_vainqueur = (char *) malloc(taille*sizeof(char));
+          while(strlen(tabmots.tab[0][i_gagnant+tabmots.offset]) > taille){
+            taille *= 2;
+            nom_vainqueur = (char*) realloc(nom_vainqueur, taille*sizeof(char));
+          }
+
+          copier_chaine_char(tabmots.tab[0][i_gagnant+tabmots.offset], nom_vainqueur);
+          fprintf(output, "Mode de scrutin : Condorcet schulze, %d candidats, %d votants, vainqueur = %s\n", nombreCandidat, nombreVotant, nom_vainqueur);
+        }
+      }
     }
   }
-
-
 
 
 

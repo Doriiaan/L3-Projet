@@ -118,6 +118,6 @@ bool dfs(liste larcs,int sommet,int * tabMark,int **tabVus);
 int vainqueurCondorcet(liste larcs, int nbSommets);
 int scoreInt(int som,liste larcs);
 //
-int schulze(t_mat_int_dyn duels_mat,FILE *outfp);
+//int schulze(t_mat_int_dyn duels_mat,FILE *outfp);
 
 #endif

@@ -1,5 +1,6 @@
 #include "fichiers_h/global.h"
 #include "fichiers_h/utils.h"
+#include "fichiers_h/utils_scrutins.h"
 
 
 /*
@@ -43,7 +44,7 @@ int vainqueurCondorcet(liste larcs, int nbSommets){
 }
 
 
-int creer_liste_arc(liste *liste_arc, t_mat_int_dyn duels_mat){
+int creer_liste_arc_etiquette(liste *liste_arc, t_mat_int_dyn duels_mat){
 
   Elementliste arc;
   Elementliste arc_inverse;
@@ -57,7 +58,29 @@ int creer_liste_arc(liste *liste_arc, t_mat_int_dyn duels_mat){
         arc_inverse.orig = y;
         arc_inverse.dest = x;
         arc_inverse.poids = duels_mat.tab[y][x];
-        if(duels_mat.tab[x][y] >= duels_mat.tab[y][x] && !belongEltList(*liste_arc, arc_inverse)){
+        if(duels_mat.tab[x][y] > duels_mat.tab[y][x] && !belongEltList(*liste_arc, arc_inverse)){
+          addTailList(liste_arc, arc);
+        }
+      }
+    }
+  }
+}
+
+int creer_liste_arc_pondere(liste *liste_arc, t_mat_int_dyn duels_mat){
+  Elementliste arc;
+  Elementliste arc_inverse;
+  // x -> y
+  for (int x = 0; x < duels_mat.nbRows; x++) {
+    for (int y = 0; y < duels_mat.nbCol; y++) {
+      if(x != y){
+        arc.orig = x;
+        arc.dest = y;
+        arc.poids = duels_mat.tab[x][y];
+        arc_inverse.orig = y;
+        arc_inverse.dest = x;
+        arc_inverse.poids = duels_mat.tab[y][x];
+        if(duels_mat.tab[x][y] > duels_mat.tab[y][x] && !belongEltList(*liste_arc, arc_inverse)){
+          arc.poids = duels_mat.tab[x][y] - duels_mat.tab[y][x];
           addTailList(liste_arc, arc);
         }
       }
@@ -106,15 +129,15 @@ t_tab_int_dyn creer_vote_par_candidat(t_mat_char_star_dyn tabmots, int nombreCan
   creer_t_tab_int_dyn(&candidats_classement, nombreCandidat);
   init_tab_int(candidats_classement.tab, nombreCandidat, 0);
 
-  int minimum_ligne = tabmots.offset;
+  for (int i_ligne = 1; i_ligne < tabmots.nbRows-1; i_ligne++) { //on parcourt les lignes
+    for (int i_colonne = tabmots.offset; i_colonne < tabmots.nbCol; i_colonne++) { //on parcourt les colonnes pour chercher le min
 
-  for (int i_votant = 1; i_votant < tabmots.nbRows-1; i_votant++) { //1 a la fin (lignes)
-    for (int i_candidat = tabmots.offset; i_candidat < tabmots.nbCol; i_candidat++) { //debut des votes jusqua la fin (colonnes)
-      if(atoi(tabmots.tab[i_votant][i_candidat]) < atoi(tabmots.tab[i_votant][minimum_ligne]))
-        minimum_ligne = i_candidat;
+      // les votes sont compris entre 1 et 10 sinon c'est considéré comme vote nul
+      // on cherche tous les minimum de la ligne parce qu'il peut y avoir des ex equo
+      if (atoi(tabmots.tab[i_ligne][i_colonne]) == minimum_ligne(tabmots, nombreCandidat, i_ligne) && atoi(tabmots.tab[i_ligne][i_colonne]) >=1 && atoi(tabmots.tab[i_ligne][i_colonne]) <= 10){
+        candidats_classement.tab[i_colonne-tabmots.offset]++;
+      }
     }
-    candidats_classement.tab[minimum_ligne-tabmots.offset]++;
-    minimum_ligne = tabmots.offset;
   }
   return candidats_classement;
 }
@@ -123,12 +146,69 @@ t_tab_int_dyn creer_vote_par_candidat(t_mat_char_star_dyn tabmots, int nombreCan
 void affiche_resultat(FILE *outfp, char * scrutin, int nbCandidats, int nbVotants , float score, char * vainqueur){
 
   if(comparer_chaine_char(scrutin, "uni1")){
-    fprintf(outfp, "Mode de scrutin : uninominale à un tour, %d candidats, %d votants, vainqueur = %s, score = %f%\n", nbCandidats, nbVotants, vainqueur, score);
+    fprintf(outfp, "Mode de scrutin : uninominale à un tour, %d candidats, %d votants, vainqueur = %s, score = %f%\n\n", nbCandidats, nbVotants, vainqueur, score);
   }
   if(comparer_chaine_char(scrutin, "uni2 tour1")){
     fprintf(outfp, "Mode de scrutin : uninominale à deux tours, tour 1, %d candidats, %d votants, vainqueur = %s, score = %f%\n", nbCandidats, nbVotants, vainqueur, score);
   }
   if(comparer_chaine_char(scrutin, "uni2 tour2")){
-    fprintf(outfp, "Mode de scrutin : uninominale à deux tours, tour 2, %d candidats, %d votants, vainqueur = %s, score = %f%\n", nbCandidats, nbVotants, vainqueur, score);
+    fprintf(outfp, "Mode de scrutin : uninominale à deux tours, tour 2, %d candidats, %d votants, vainqueur = %s, score = %f%\n\n", nbCandidats, nbVotants, vainqueur, score);
+  }
+}
+
+int minimum_ligne(t_mat_char_star_dyn tabmots, int nombreCandidat, int i_ligne){
+
+  int minimum = atoi(tabmots.tab[i_ligne][tabmots.offset]);
+  for (int i = tabmots.offset; i < nombreCandidat+tabmots.offset; i++) {
+    if(atoi(tabmots.tab[i_ligne][i]) < minimum)
+      minimum = atoi(tabmots.tab[i_ligne][i]);
+  }
+  return minimum;
+}
+
+void creer_mat_force_du_plus_fort_chemin(t_mat_int_dyn *p, t_mat_int_dyn duels_mat){
+
+  int nbSommets = p->nbRows;
+  for (int i = 0; i < nbSommets; i++) {
+    for (int j = 0; j < nbSommets; j++) {
+      if (i != j){
+        if (duels_mat.tab[i][j] > duels_mat.tab[j][i])
+            p->tab[i][j] = duels_mat.tab[i][j];
+        else
+            p->tab[i][j] = 0;
+      }
+      else
+        p->tab[i][j] = 0;
+    }
+  }
+
+  for (int i = 0; i < nbSommets; i++) {
+    for (int j = 0; j < nbSommets; j++) {
+      if (i != j) {
+        for (int k = 0; k < nbSommets; k++) {
+          if (i != k && j != k) {
+            p->tab[j][k] = max(p->tab[j][k], min(p->tab[j][i], p->tab[i][k]));
+          }
+        }
+      }
+    }
+  }
+}
+
+void creer_ensemble_gagnants_potentiels(t_tab_int_dyn *ensemble_gagnants_potentiels, t_mat_int_dyn p){
+
+  int nbSommets = p.nbRows;
+  init_tab_int(ensemble_gagnants_potentiels->tab, nbSommets, 0);
+
+  for (int x = 0; x < nbSommets; x++) {
+    int gagnant_potentiel = 1;
+    for (int y = 0; y < nbSommets; y++) {
+      if(x != y){
+        if(p.tab[x][y] < p.tab[y][x])
+          gagnant_potentiel = 0;
+      }
+    }
+    if(gagnant_potentiel == 1)
+      ensemble_gagnants_potentiels->tab[x] = 1;
   }
 }

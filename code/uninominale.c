@@ -8,8 +8,15 @@ void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tab
   int nombreCandidat = vote_par_candidat.dim;
 
   // chercher le nom du vainqueur
-  char *nom_vainqueur = (char *) malloc(LONGMOTS*sizeof(char));
   int indice_vainqueur = max_tab_indice(vote_par_candidat.tab, vote_par_candidat.dim);
+  int taille = LONGMOTS;
+  char *nom_vainqueur = (char *) malloc(taille*sizeof(char));
+  while(strlen(tabmots.tab[0][indice_vainqueur+tabmots.offset]) > taille){
+    taille *= 2;
+    nom_vainqueur = (char*) realloc(nom_vainqueur, taille*sizeof(char));
+  }
+
+
   float score = ((float)(vote_par_candidat.tab[indice_vainqueur]) / (float)(nombreVotant)) * 100;
   copier_chaine_char(tabmots.tab[0][indice_vainqueur+tabmots.offset], nom_vainqueur);
   affiche_resultat(outfp, "uni1", nombreCandidat, nombreVotant,  score, nom_vainqueur);
@@ -35,8 +42,19 @@ void uninominal_deux_tours(t_tab_int_dyn vote_par_candidat, t_mat_int_dyn duels_
   float score_vainqueur1 = ((float)(vote_par_candidat.tab[indice_vainqueur1]) / (float)(nombreVotant)) * 100;
   float score_vainqueur2 = ((float)(vote_par_candidat.tab[indice_vainqueur2]) / (float)(nombreVotant)) * 100;
 
-  char *nom_vainqueur1 = (char *) malloc(LONGMOTS*sizeof(char));
-  char *nom_vainqueur2 = (char *) malloc(LONGMOTS*sizeof(char));
+  int taille = LONGMOTS;
+  char *nom_vainqueur1 = (char *) malloc(taille*sizeof(char));
+  while(strlen(tabmots.tab[0][indice_vainqueur1+tabmots.offset]) > taille){
+    taille *= 2;
+    nom_vainqueur1 = (char*) realloc(nom_vainqueur1, taille*sizeof(char));
+  }
+
+  taille = LONGMOTS;
+  char *nom_vainqueur2 = (char *) malloc(taille*sizeof(char));
+  while(strlen(tabmots.tab[0][indice_vainqueur2+tabmots.offset]) > taille){
+    taille *= 2;
+    nom_vainqueur2 = (char*) realloc(nom_vainqueur2, taille*sizeof(char));
+  }
 
   copier_chaine_char(tabmots.tab[0][indice_vainqueur1+tabmots.offset], nom_vainqueur1);
   copier_chaine_char(tabmots.tab[0][indice_vainqueur2+tabmots.offset], nom_vainqueur2);

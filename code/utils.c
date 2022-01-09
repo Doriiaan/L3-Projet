@@ -185,3 +185,15 @@ int comparer_chaine_char(char const *source1, char const* source2){
   }
   return 1;
 }
+
+int max(int a, int b){
+  if(a > b)
+    return a;
+  return b;
+}
+
+int min(int a, int b){
+  if(a < b)
+    return a;
+  return b;
+}
