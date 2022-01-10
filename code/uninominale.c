@@ -4,6 +4,9 @@
 
 void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tabmots, FILE *outfp){
 
+  fprintf(outfp, "\n\n-------------------------------------\n");
+  fprintf(outfp, "----------UNINOMINALE 1 TOUR---------\n");
+  fprintf(outfp, "-------------------------------------\n\n");
   int nombreVotant = tabmots.nbRows-1;
   int nombreCandidat = vote_par_candidat.dim;
 
@@ -19,6 +22,7 @@ void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tab
 
   float score = ((float)(vote_par_candidat.tab[indice_vainqueur]) / (float)(nombreVotant)) * 100;
   copier_chaine_char(tabmots.tab[0][indice_vainqueur+tabmots.offset], nom_vainqueur);
+
   affiche_resultat(outfp, "uni1", nombreCandidat, nombreVotant,  score, nom_vainqueur);
   free(nom_vainqueur);
 }
@@ -26,6 +30,9 @@ void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tab
 
 void uninominal_deux_tours(t_tab_int_dyn vote_par_candidat, t_mat_int_dyn duels_mat, t_mat_char_star_dyn tabmots, FILE *outfp){
 
+  fprintf(outfp, "\n\n-------------------------------------\n");
+  fprintf(outfp, "---------UNINOMINALE 2 TOURS---------\n");
+  fprintf(outfp, "-------------------------------------\n\n");
   int nombreVotant = tabmots.nbRows-1;
   int nombreCandidat = tabmots.nbCol-tabmots.offset;
 

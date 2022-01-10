@@ -19,7 +19,10 @@ typedef struct s_arc_p{ /// arc pondéré = arc de préférence
 */
 
 int minimax(t_mat_int_dyn duels_mat, liste larcs, int nbSommets,FILE *outfp){
-
+  
+  fprintf(outfp, "\n\n-------------------------------------\n");
+  fprintf(outfp, "----------CONDORCET MINIMAX----------\n");
+  fprintf(outfp, "-------------------------------------\n");
   int vainqueur_condorcet = vainqueurCondorcet(larcs, nbSommets);
   if(vainqueur_condorcet != -1){
     return vainqueur_condorcet;
@@ -50,6 +53,11 @@ int minimax(t_mat_int_dyn duels_mat, liste larcs, int nbSommets,FILE *outfp){
       addTailList(&liste_arc_moins_bon, arc_moins_bon);
     }
     bubbleSortList(&liste_arc_moins_bon);
+    if(outfp != stdout){
+      fprintf(outfp, "\n-----GRAPHE DES DUELS MINIMUMS-----\n\n");
+      dumpList(liste_arc_moins_bon, outfp);
+      fprintf(outfp, "\n");
+    }
     headList(liste_arc_moins_bon, &minimax_elem);
     return minimax_elem.orig;
   }

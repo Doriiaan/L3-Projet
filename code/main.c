@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "fichiers_h/global.h"
 #include "fichiers_h/utils_scrutins.h"
+#include "fichiers_h/utils.h"
 
 void copier_chaine_char(char const *source, char* destination);
 int comparer_chaine_char(char const *source1, char const* source2);
@@ -18,6 +19,9 @@ int main(int argc, char const *argv[]) {
 
     //compte les options
     for (int i_opt = 1; i_opt < argc; i_opt++) { //boucle des options
+
+      if(argv[i_opt][0] == '-' && !(comparer_chaine_char(argv[i_opt], "-i") || comparer_chaine_char(argv[i_opt], "-d") || comparer_chaine_char(argv[i_opt], "-m") || comparer_chaine_char(argv[i_opt], "-o")))
+        erreur("Une option n'existe pas\nUtilisation: ./vote -i,-d fichier_csv -m methode [-o log.txt]\n");
 
       if (comparer_chaine_char(argv[i_opt], "-i")) { //traitement de l'option -i
         if (options[0] == 1)
@@ -52,10 +56,14 @@ int main(int argc, char const *argv[]) {
           erreur("Ne pas mettre deux fois la meme option\nUtilisation: ./vote -i,-d fichier_csv -m methode [-o log.txt]\n");
         if(i_opt == argc-1 || argv[i_opt+1][0] == '-')
           erreur("Il faut rajouter un fichier log en argument\nUtilisation: ./vote -i,-d fichier_csv -m methode [-o log.txt]\n");
-
-        output = fopen(argv[i_opt+1], "r");
-        if(output == NULL)
+        if(!verifier_fichier_txt(argv[i_opt+1]))
+          erreur("Le fichier log doit etre un fichier txt\nUtilisation: ./vote -i,-d fichier_csv -m methode [-o log.txt]\n");
+        output = fopen(argv[i_opt+1], "w");
+        if(output == NULL){
           output = stdout;
+          fprintf(stderr, "Le fichier log n'est pas accessible, la sortie se fera sur la sortie standard\n");
+          fprintf(stderr, "-----------------------------------------------------------------------------\n");
+        }
         else
           options[2] = 1;
       }
@@ -119,11 +127,24 @@ int main(int argc, char const *argv[]) {
 
   // APPLIQUER LA METHODE EN FONCTION DES OPTIONS
   if(options[0] == 1){ // -i
+
     nombreVotant = tabmots.nbRows -1;
     nombreCandidat = tabmots.nbCol-tabmots.offset;
     t_tab_int_dyn vote_par_candidat = creer_vote_par_candidat(tabmots, nombreCandidat); //creer le nombre de vote par candidat
-    construct_mat_duels_d(tabmots, &duels_mat, nombreCandidat, stdout); //creer la matrice des duels
+    construct_mat_duels_d(tabmots, &duels_mat, nombreCandidat, output); //creer la matrice des duels
     creer_liste_arc_etiquette(&liste_arc, duels_mat); //creer la liste des arcs etiquetté
+
+    if(options[2] == 1){ //fichier log ouvert
+      if(methode[0] == 1 || methode[1] == 1){
+        fprintf(output, "\n\n-----TABLEAU VOTE PAR CANDIDAT-----\n");
+        affiche_t_tab_int_dyn(vote_par_candidat, output);
+      }
+      fprintf(output, "\n\n-----MATRICE DES DUELS-----\n");
+      affiche_t_mat_int_dyn(duels_mat, output);
+      fprintf(output, "\n\n-----GRAPHE ORIENTE-----\n");
+      dumpList(liste_arc, output);
+      fprintf(output, "\n");
+    }
 
     //methode uninominale 1 tour
     if(methode[0] == 1 || methode[4] == 1){
@@ -132,13 +153,12 @@ int main(int argc, char const *argv[]) {
 
     //methode uninominale 2 tour
     if(methode[1] == 1 || methode[4] == 1){
-      affiche_t_tab_int_dyn(vote_par_candidat, stdout);
       uninominal_deux_tours(vote_par_candidat, duels_mat, tabmots, output);
     }
 
     //methode minimax
     if(methode[2] == 1 || methode[4] == 1){
-      int indice_vainqueur = minimax(duels_mat,liste_arc, nombreCandidat,stdout);
+      int indice_vainqueur = minimax(duels_mat,liste_arc, nombreCandidat, output);
 
       int taille = LONGMOTS;
       char *nom_vainqueur = (char *) malloc(taille*sizeof(char));
@@ -155,7 +175,7 @@ int main(int argc, char const *argv[]) {
     if(methode[3] == 1 || methode[4] == 1){
       t_tab_int_dyn liste_gagnants_schulzes;
       creer_t_tab_int_dyn(&liste_gagnants_schulzes, nombreCandidat);
-      liste_gagnants_schulzes = schulze(duels_mat, liste_arc, nombreCandidat, stdout);
+      liste_gagnants_schulzes = schulze(duels_mat, liste_arc, nombreCandidat, output);
 
 
       for (int i_gagnant = 0; i_gagnant < nombreCandidat; i_gagnant++) {
@@ -183,9 +203,17 @@ int main(int argc, char const *argv[]) {
     nombreVotant = duels_mat.tab[0][1] + duels_mat.tab[1][0];
     creer_liste_arc_etiquette(&liste_arc, duels_mat); //creer la liste des arcs
 
+    if(options[2] == 1){ //fichier log ouvert
+        fprintf(output, "-----MATRICE DES DUELS-----\n\n");
+        affiche_t_mat_int_dyn(duels_mat, output);
+        fprintf(output, "\n-------GRAPHE ORIENTE------\n\n");
+        dumpList(liste_arc, output);
+        fprintf(output, "\n");
+    }
+
     //methode minimax
     if(methode[2] == 1 || methode[4] == 1){
-      int indice_vainqueur = minimax(duels_mat,liste_arc, nombreCandidat,stdout);
+      int indice_vainqueur = minimax(duels_mat,liste_arc, nombreCandidat, output);
 
       int taille = LONGMOTS;
       char *nom_vainqueur = (char *) malloc(taille*sizeof(char));
@@ -202,7 +230,7 @@ int main(int argc, char const *argv[]) {
     if(methode[3] == 1 || methode[4] == 1){
       t_tab_int_dyn liste_gagnants_schulzes;
       creer_t_tab_int_dyn(&liste_gagnants_schulzes, nombreCandidat);
-      liste_gagnants_schulzes = schulze(duels_mat, liste_arc, nombreCandidat, stdout);
+      liste_gagnants_schulzes = schulze(duels_mat, liste_arc, nombreCandidat, output);
 
       for (int i_gagnant = 0; i_gagnant < nombreCandidat; i_gagnant++) {
         if(liste_gagnants_schulzes.tab[i_gagnant] == 1){

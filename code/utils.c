@@ -153,7 +153,7 @@ void affiche_t_mat_char_star_dyn(t_mat_char_star_dyn t_tabmots, FILE *outfp){
 void affiche_t_mat_int_dyn(t_mat_int_dyn t_tab, FILE *outfp){
   for (int i = 0; i < t_tab.nbRows; i++) {
     for (int y = 0; y < t_tab.nbCol; y++) {
-      fprintf(outfp, "%d ", t_tab.tab[i][y]);
+      fprintf(outfp, "%4d ", t_tab.tab[i][y]);
     }
     fprintf(outfp, "\n");
   }
@@ -162,7 +162,7 @@ void affiche_t_mat_int_dyn(t_mat_int_dyn t_tab, FILE *outfp){
 // affiche le tableau structure dans l'output, un fichier
 void affiche_t_tab_int_dyn(t_tab_int_dyn t_tab, FILE *outfp){
   for (int i = 0; i < t_tab.dim; i++) {
-      fprintf(outfp, "%d ", t_tab.tab[i]);
+      fprintf(outfp, "%4d ", t_tab.tab[i]);
     }
     fprintf(outfp, "\n");
 }
@@ -196,4 +196,16 @@ int min(int a, int b){
   if(a < b)
     return a;
   return b;
+}
+
+int verifier_fichier_txt(const char* nom_de_fichier){
+
+  int taille_nom = 0;
+  while (nom_de_fichier[taille_nom] != '\0') {
+    taille_nom++;
+  }
+  if (nom_de_fichier[taille_nom-4] == '.' && nom_de_fichier[taille_nom-3] == 't' && nom_de_fichier[taille_nom-2] == 'x' && nom_de_fichier[taille_nom-1] == 't') {
+    return 1;
+  }
+  return 0;
 }
