@@ -1,8 +1,19 @@
+/**
+* @file uninominale.c
+* @brief Fichier contenant les fonctions d'election par methode uninominale \n
+* @author ALARY Dorian
+* @date Janvier 2022
+*/
+
+
 #include "fichiers_h/global.h"
 #include "fichiers_h/utils_scrutins.h"
 #include "fichiers_h/utils.h"
 
-
+/**
+* @fn void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tabmots, FILE *outfp)
+* @brief affiche le vainqueur par la methode uninominale un tour
+*/
 void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tabmots, FILE *outfp){
 
   fprintf(outfp, "\n\n-------------------------------------\n");
@@ -12,7 +23,9 @@ void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tab
   int nombreCandidat = vote_par_candidat.dim;
 
   // chercher le nom du vainqueur
-  int indice_vainqueur = max_tab_indice(vote_par_candidat.tab, vote_par_candidat.dim);
+  int indice_vainqueur = max_tab_indice(vote_par_candidat.tab, vote_par_candidat.dim); //on prend le max des vote par candidats
+
+  //on redimensione le nom au cas ou la taille est trop petite
   int taille = LONGMOTS;
   char *nom_vainqueur = (char *) malloc(taille*sizeof(char));
   while(strlen(tabmots.tab[0][indice_vainqueur+tabmots.offset]) > taille){
@@ -27,7 +40,10 @@ void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tab
   free(nom_vainqueur);
 }
 
-
+/**
+* void uninominal_deux_tours(t_tab_int_dyn vote_par_candidat, t_mat_int_dyn duels_mat, t_mat_char_star_dyn tabmots, FILE *outfp)
+* @brief affiche le vainqueur par la methode uninominale deux tours
+*/
 void uninominal_deux_tours(t_tab_int_dyn vote_par_candidat, t_mat_int_dyn duels_mat, t_mat_char_star_dyn tabmots, FILE *outfp){
 
   fprintf(outfp, "\n\n-------------------------------------\n");
@@ -37,8 +53,9 @@ void uninominal_deux_tours(t_tab_int_dyn vote_par_candidat, t_mat_int_dyn duels_
   int nombreCandidat = tabmots.nbCol-tabmots.offset;
 
   // chercher le nom du vainqueur
-  int indice_vainqueur1 = max_tab_indice(vote_par_candidat.tab, vote_par_candidat.dim);
-  int indice_vainqueur2 = 0;
+  int indice_vainqueur1 = max_tab_indice(vote_par_candidat.tab, vote_par_candidat.dim);//on prend le max des vote par candidats
+
+  int indice_vainqueur2 = 0; //on cherche le deuxieme max de la liste
   if(indice_vainqueur1 == 0)
     indice_vainqueur2 = 1;
   for (int i = 0; i < vote_par_candidat.dim; i++) {
@@ -48,6 +65,7 @@ void uninominal_deux_tours(t_tab_int_dyn vote_par_candidat, t_mat_int_dyn duels_
   float score_vainqueur1 = ((float)(vote_par_candidat.tab[indice_vainqueur1]) / (float)(nombreVotant)) * 100;
   float score_vainqueur2 = ((float)(vote_par_candidat.tab[indice_vainqueur2]) / (float)(nombreVotant)) * 100;
 
+  //on redimensione le nom au cas ou la taille est trop petite
   int taille = LONGMOTS;
   char *nom_vainqueur1 = (char *) malloc(taille*sizeof(char));
   while(strlen(tabmots.tab[0][indice_vainqueur1+tabmots.offset]) > taille){
@@ -55,6 +73,7 @@ void uninominal_deux_tours(t_tab_int_dyn vote_par_candidat, t_mat_int_dyn duels_
     nom_vainqueur1 = (char*) realloc(nom_vainqueur1, taille*sizeof(char));
   }
 
+  //on redimensione le nom au cas ou la taille est trop petite
   taille = LONGMOTS;
   char *nom_vainqueur2 = (char *) malloc(taille*sizeof(char));
   while(strlen(tabmots.tab[0][indice_vainqueur2+tabmots.offset]) > taille){

@@ -1,8 +1,19 @@
+/**
+* @file condorcet_schulze.c
+* @brief Fichier contenant les fonctions d'election par methode condorcet schulze \n
+* @author ALARY Dorian
+* @date Janvier 2022
+*/
+
 #include "fichiers_h/global.h"
 #include "fichiers_h/utils.h"
 #include "fichiers_h/utils_scrutins.h"
 
-
+/**
+* @fn t_tab_int_dyn schulze(t_mat_int_dyn duels_mat, liste larcs, int nbSommets, FILE *outfp)
+* @brief renvoie l'ensemble des gagnants potentiels et affiche les calculs intermediaire dans fichier log si besoin
+* @param[out] t_tab_int_dyn ensemble_gagnants_potentiels
+*/
 t_tab_int_dyn schulze(t_mat_int_dyn duels_mat, liste larcs, int nbSommets, FILE *outfp){
 
   fprintf(outfp, "\n\n-------------------------------------\n");

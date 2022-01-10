@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vainqueurcondorcet_0',['vainqueurCondorcet',['../global_8h.html#a43427a805ded4b0d0a0f15cc92758a51',1,'vainqueurCondorcet(liste larcs, int nbSommets):&#160;utils_scrutins.c'],['../utils__scrutins_8c.html#a43427a805ded4b0d0a0f15cc92758a51',1,'vainqueurCondorcet(liste larcs, int nbSommets):&#160;utils_scrutins.c']]],
-  ['verifier_5ffichier_5ftxt_1',['verifier_fichier_txt',['../utils_8c.html#a72b2c01363cabfaa53a24999083121c5',1,'utils.c']]]
+  ['uninominal_5fdeux_5ftours_0',['uninominal_deux_tours',['../uninominale_8c.html#aa3e1b0101ade437872dda820d3e2c038',1,'uninominale.c']]],
+  ['uninominal_5fun_5ftour_1',['uninominal_un_tour',['../uninominale_8c.html#a13ce58f3c5b45352c2033d0cb5c52920',1,'uninominale.c']]]
 ];

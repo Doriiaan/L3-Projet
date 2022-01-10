@@ -180,6 +180,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>getop</b> (char **tab_
 <tr class="separator:a68087480316e7bb27862a2273d161b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab618f9f495bb9391b635ca0f3eb39190"><td class="memItemLeft" align="right" valign="top"><a id="ab618f9f495bb9391b635ca0f3eb39190" name="ab618f9f495bb9391b635ca0f3eb39190"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>affiche_resultat</b> (FILE *outfp, char *scrutin, int nbCandidats, int nbVotants, float score, char *vainqueur)</td></tr>
+<tr class="memdesc:ab618f9f495bb9391b635ca0f3eb39190"><td class="mdescLeft">&#160;</td><td class="mdescRight">affiche les resultats de uninominale <br /></td></tr>
 <tr class="separator:ab618f9f495bb9391b635ca0f3eb39190"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99211900ea59d15a5ad9bf8dabd72929"><td class="memItemLeft" align="right" valign="top"><a id="a99211900ea59d15a5ad9bf8dabd72929" name="a99211900ea59d15a5ad9bf8dabd72929"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>erreur</b> (char *message)</td></tr>
@@ -263,8 +264,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>scan_ligne</b> (<a cl
 <tr class="memitem:a3dfd57c830ecfdedacb6c7f5ff01cb6e"><td class="memItemLeft" align="right" valign="top"><a id="a3dfd57c830ecfdedacb6c7f5ff01cb6e" name="a3dfd57c830ecfdedacb6c7f5ff01cb6e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>construct_data_struct</b> (<a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> *tabmots, <a class="el" href="structs__tab__dyn.html">t_tab_int_dyn</a> *first_array, <a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> *duels_mat, FILE *outfp)</td></tr>
 <tr class="separator:a3dfd57c830ecfdedacb6c7f5ff01cb6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ffa8998b4ee0b956dad3498bc736de9"><td class="memItemLeft" align="right" valign="top"><a id="a0ffa8998b4ee0b956dad3498bc736de9" name="a0ffa8998b4ee0b956dad3498bc736de9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>construct_mat_duels_d</b> (<a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, <a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> *duels_mat, int nbCandidats, FILE *outfp)</td></tr>
+<tr class="memitem:a0ffa8998b4ee0b956dad3498bc736de9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="global_8h.html#a0ffa8998b4ee0b956dad3498bc736de9">construct_mat_duels_d</a> (<a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, <a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> *duels_mat, int nbCandidats, FILE *outfp)</td></tr>
+<tr class="memdesc:a0ffa8998b4ee0b956dad3498bc736de9"><td class="mdescLeft">&#160;</td><td class="mdescRight">creer la matrice des duels  <a href="global_8h.html#a0ffa8998b4ee0b956dad3498bc736de9">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a0ffa8998b4ee0b956dad3498bc736de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77072c10c316e8d6d7d31dd82fc724a9"><td class="memItemLeft" align="right" valign="top"><a id="a77072c10c316e8d6d7d31dd82fc724a9" name="a77072c10c316e8d6d7d31dd82fc724a9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>maxSommet</b> (<a class="el" href="structliste.html">liste</a> larcs)</td></tr>
@@ -298,6 +299,55 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nbVotesNuls</b></td></
 <div class="textblock"><dl class="section author"><dt>Auteur</dt><dd>Vincent Dugat </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>august 2018 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a0ffa8998b4ee0b956dad3498bc736de9" name="a0ffa8998b4ee0b956dad3498bc736de9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ffa8998b4ee0b956dad3498bc736de9">&#9670;&nbsp;</a></span>construct_mat_duels_d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void construct_mat_duels_d </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a>&#160;</td>
+          <td class="paramname"><em>tabmots</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> *&#160;</td>
+          <td class="paramname"><em>duels_mat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nbCandidats</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>outfp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>creer la matrice des duels </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">t_mat_char_star_dyn</td><td>tabmots </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">t_mat_int_dyn</td><td>*duels_mat </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a43427a805ded4b0d0a0f15cc92758a51" name="a43427a805ded4b0d0a0f15cc92758a51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a43427a805ded4b0d0a0f15cc92758a51">&#9670;&nbsp;</a></span>vainqueurCondorcet()</h2>
 

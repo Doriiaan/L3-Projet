@@ -26,6 +26,11 @@ int vainqueurCondorcet(liste larcs, int nbSommets){
 
   int i_arc = 1;
   while (i_arc < nbEltList(larcs) && nombre_victoire != nbSommets-1) {
+    /*
+    On parcourt toute la liste,
+    si un sommet à autant de victoire qu'il y a d'autres sommet alors il est vainqueur
+    sinon on teste avec le prochain sommet
+    */
     if(larcs.Tabliste[i_arc].orig == x){
       nombre_victoire++;
     }
@@ -44,9 +49,9 @@ int vainqueurCondorcet(liste larcs, int nbSommets){
 
 /**
 * @fn int creer_liste_arc_etiquette(liste *liste_arc, t_mat_int_dyn duels_mat))
-* @brief creer la liste des arcs (graphique)
+* @brief creer la liste des arcs etiquette(graphique)
 * @param[in] t_mat_int_dyn matrice des duels
-* @param[in, out] liste liste des arcs (graphique)
+* @param[in, out] liste liste des arcs etiquette(graphique)
 */
 void creer_liste_arc_etiquette(liste *liste_arc, t_mat_int_dyn duels_mat){
 
@@ -62,7 +67,7 @@ void creer_liste_arc_etiquette(liste *liste_arc, t_mat_int_dyn duels_mat){
         arc_inverse.orig = y;
         arc_inverse.dest = x;
         arc_inverse.poids = duels_mat.tab[y][x];
-        if(duels_mat.tab[x][y] > duels_mat.tab[y][x] && !belongEltList(*liste_arc, arc_inverse)){ //si x est prefere a y et que l'arc inverse 
+        if(duels_mat.tab[x][y] > duels_mat.tab[y][x] && !belongEltList(*liste_arc, arc_inverse)){ //si "x prefere a y" et on test si "y prefere x" n'y est pas
           addTailList(liste_arc, arc);
         }
       }
@@ -70,6 +75,12 @@ void creer_liste_arc_etiquette(liste *liste_arc, t_mat_int_dyn duels_mat){
   }
 }
 
+/**
+* @fn int creer_liste_arc_pondere(liste *liste_arc, t_mat_int_dyn duels_mat)
+* @brief creer la liste des arcs pondere (graphique)
+* @param[in] t_mat_int_dyn matrice des duels
+* @param[in, out] liste liste des arcs pondere (graphique)
+*/
 int creer_liste_arc_pondere(liste *liste_arc, t_mat_int_dyn duels_mat){
   Elementliste arc;
   Elementliste arc_inverse;
@@ -92,6 +103,12 @@ int creer_liste_arc_pondere(liste *liste_arc, t_mat_int_dyn duels_mat){
   }
 }
 
+/**
+* @fn void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,int nbCandidats,FILE *outfp)
+* @brief creer la matrice des duels
+* @param[in] t_mat_char_star_dyn tabmots
+* @param[in, out] t_mat_int_dyn *duels_mat
+*/
 void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,int nbCandidats,FILE *outfp){
 
   creer_t_mat_int_dyn(duels_mat, nbCandidats, nbCandidats);
@@ -101,8 +118,12 @@ void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,
   for (int x = 0; x < nbCandidats; x++) {
     for (int y = 0; y < nbCandidats; y++) {
       if(x != y){
+
+        //pour chaque ligne on va verifier si x prefere y
         for (int i_ligne = 1; i_ligne < nombreVotant; i_ligne++) {
-          if(atoi(tabmots.tab[i_ligne][x + tabmots.offset]) < atoi(tabmots.tab[i_ligne][y + tabmots.offset]) && atoi(tabmots.tab[i_ligne][x + tabmots.offset]) <= 10 && atoi(tabmots.tab[i_ligne][x + tabmots.offset]) >= 0){
+
+          //on regarde si x prefere y dans la ligne
+          if(atoi(tabmots.tab[i_ligne][x + tabmots.offset]) < atoi(tabmots.tab[i_ligne][y + tabmots.offset]) && atoi(tabmots.tab[i_ligne][x + tabmots.offset]) <= 10 && atoi(tabmots.tab[i_ligne][x + tabmots.offset]) >= 1){
             somme_vote_x_superieur_y++;
           }
 
@@ -117,6 +138,12 @@ void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,
   }
 }
 
+/**
+* @fn void copie_tabmots_duels_mat(t_mat_char_star_dyn tabmots, t_mat_int_dyn *duels_mat, int nbCandidats)
+* @brief pour l'option -d copier tabmots pour creer la matrice des duels
+* @param[in] t_mat_char_star_dyn tabmots
+* @param[in, out] t_mat_int_dyn *duels_mat
+*/
 void copie_tabmots_duels_mat(t_mat_char_star_dyn tabmots, t_mat_int_dyn *duels_mat, int nbCandidats){
 
   creer_t_mat_int_dyn(duels_mat, nbCandidats, nbCandidats);
@@ -128,7 +155,12 @@ void copie_tabmots_duels_mat(t_mat_char_star_dyn tabmots, t_mat_int_dyn *duels_m
   }
 }
 
-
+/**
+* @fn t_tab_int_dyn creer_vote_par_candidat(t_mat_char_star_dyn tabmots, int nombreCandidat)
+* @brief creer le tableau du nombre de votes des electeurs pour chaqye candidats pour uni1 et uni2
+* @param[in] t_mat_char_star_dyn tabmots
+* @param[out] t_tab_int_dyn candidats_classement
+*/
 t_tab_int_dyn creer_vote_par_candidat(t_mat_char_star_dyn tabmots, int nombreCandidat){
 
   t_tab_int_dyn candidats_classement;
@@ -140,7 +172,7 @@ t_tab_int_dyn creer_vote_par_candidat(t_mat_char_star_dyn tabmots, int nombreCan
 
       // les votes sont compris entre 1 et 10 sinon c'est considéré comme vote nul
       // on cherche tous les minimum de la ligne parce qu'il peut y avoir des ex equo
-      if (atoi(tabmots.tab[i_ligne][i_colonne]) == minimum_ligne(tabmots, nombreCandidat, i_ligne)){
+      if (atoi(tabmots.tab[i_ligne][i_colonne]) == minimum_ligne(tabmots, nombreCandidat, i_ligne) && atoi(tabmots.tab[i_ligne][i_colonne]) <= 10 && atoi(tabmots.tab[i_ligne][i_colonne]) >= 1){
         candidats_classement.tab[i_colonne-tabmots.offset]++;
       }
     }
@@ -148,7 +180,10 @@ t_tab_int_dyn creer_vote_par_candidat(t_mat_char_star_dyn tabmots, int nombreCan
   return candidats_classement;
 }
 
-
+/**
+* @fn void affiche_resultat(FILE *outfp, char * scrutin, int nbCandidats, int nbVotants , float score, char * vainqueur)
+* @brief affiche les resultats de uninominale
+*/
 void affiche_resultat(FILE *outfp, char * scrutin, int nbCandidats, int nbVotants , float score, char * vainqueur){
 
   if(comparer_chaine_char(scrutin, "uni1")){
@@ -162,6 +197,12 @@ void affiche_resultat(FILE *outfp, char * scrutin, int nbCandidats, int nbVotant
   }
 }
 
+/**
+* @fn int minimum_ligne(t_mat_char_star_dyn tabmots, int nombreCandidat, int i_ligne)
+* @brief cherche la valeur minimum d'une ligne du tableau csv
+* @param[in] t_mat_char_star_dyn tabmots
+* @param[out] int minimum
+*/
 int minimum_ligne(t_mat_char_star_dyn tabmots, int nombreCandidat, int i_ligne){
 
   int minimum = atoi(tabmots.tab[i_ligne][tabmots.offset]);
@@ -172,8 +213,17 @@ int minimum_ligne(t_mat_char_star_dyn tabmots, int nombreCandidat, int i_ligne){
   return minimum;
 }
 
+/**
+* @fn void creer_mat_force_du_plus_fort_chemin(t_mat_int_dyn *p, t_mat_int_dyn duels_mat)
+* @brief creer la matrice des forces des plus fort chemins \n
+* Algorithme recuperer de la page wikipedia condorcet schulze anglophone \n
+* https://en.wikipedia.org/wiki/Schulze_method
+* @param[in] t_mat_int_dyn duels_mat
+* @param[in, out] t_mat_int_dyn *p
+*/
 void creer_mat_force_du_plus_fort_chemin(t_mat_int_dyn *p, t_mat_int_dyn duels_mat){
 
+  // etape 1) ecrit dans la matrice les score des duels gagnant et 0 pour les perdant
   int nbSommets = p->nbRows;
   for (int i = 0; i < nbSommets; i++) {
     for (int j = 0; j < nbSommets; j++) {
@@ -188,6 +238,11 @@ void creer_mat_force_du_plus_fort_chemin(t_mat_int_dyn *p, t_mat_int_dyn duels_m
     }
   }
 
+  /* etape 2) On prends tous les poids des arcs des chemins,
+     on note leurs minimums de chaque chemin,
+     on garde que le chemin qui a le plus fort des minimums
+     on écrit son minimum dans la matrice
+  */
   for (int i = 0; i < nbSommets; i++) {
     for (int j = 0; j < nbSommets; j++) {
       if (i != j) {
@@ -201,8 +256,16 @@ void creer_mat_force_du_plus_fort_chemin(t_mat_int_dyn *p, t_mat_int_dyn duels_m
   }
 }
 
+/**
+* @fn void creer_ensemble_gagnants_potentiels(t_tab_int_dyn *ensemble_gagnants_potentiels, t_mat_int_dyn p)
+* @brief creer l'ensemble des gagnants potentiels de schulze
+* @param[in] t_mat_int_dyn matrice force des plus fort chemin (p)
+* @param[in, out] t_tab_int_dyn *ensemble_gagnants_potentiels
+*/
 void creer_ensemble_gagnants_potentiels(t_tab_int_dyn *ensemble_gagnants_potentiels, t_mat_int_dyn p){
 
+  // si pour x, chaque chemin vers y est plus fort que le chemin de y vers x
+  // alors x est un gagant potentiel
   int nbSommets = p.nbRows;
   init_tab_int(ensemble_gagnants_potentiels->tab, nbSommets, 0);
 
