@@ -1,22 +1,21 @@
+/**
+* @file utils_scrutins.c
+* @brief Fichier contenant les fonctions utiles pour les fonctions de scrutins \n
+* exemple : vainqueurCondorcet
+* @author ALARY Dorian
+* @date Janvier 2022
+*/
+
 #include "fichiers_h/global.h"
 #include "fichiers_h/utils.h"
 #include "fichiers_h/utils_scrutins.h"
 
 
-/*
-struct liste {
-    Elementliste Tabliste[DIMMAX];
-    int Tete;
-    int nbElt;
-};
-
-typedef struct s_arc_p{ /// arc pondéré = arc de préférence
-  int orig;
-  int dest;
-  int poids;
-} t_arc_p;
-
-
+/**
+* @fn int vainqueurCondorcet(liste larcs, int nbSommets)
+* @brief renvoie l'indice du vainqueur de Condorcet s'il y en a un sinon renvoie -1
+* @param[in] liste liste des arcs
+* @param[out] int indice vainqueur de condorcet ou -1
 */
 int vainqueurCondorcet(liste larcs, int nbSommets){
 
@@ -43,8 +42,13 @@ int vainqueurCondorcet(liste larcs, int nbSommets){
   return vainqueur;
 }
 
-
-int creer_liste_arc_etiquette(liste *liste_arc, t_mat_int_dyn duels_mat){
+/**
+* @fn int creer_liste_arc_etiquette(liste *liste_arc, t_mat_int_dyn duels_mat))
+* @brief creer la liste des arcs (graphique)
+* @param[in] t_mat_int_dyn matrice des duels
+* @param[in, out] liste liste des arcs (graphique)
+*/
+void creer_liste_arc_etiquette(liste *liste_arc, t_mat_int_dyn duels_mat){
 
   Elementliste arc;
   Elementliste arc_inverse;
@@ -58,7 +62,7 @@ int creer_liste_arc_etiquette(liste *liste_arc, t_mat_int_dyn duels_mat){
         arc_inverse.orig = y;
         arc_inverse.dest = x;
         arc_inverse.poids = duels_mat.tab[y][x];
-        if(duels_mat.tab[x][y] > duels_mat.tab[y][x] && !belongEltList(*liste_arc, arc_inverse)){
+        if(duels_mat.tab[x][y] > duels_mat.tab[y][x] && !belongEltList(*liste_arc, arc_inverse)){ //si x est prefere a y et que l'arc inverse 
           addTailList(liste_arc, arc);
         }
       }
@@ -94,12 +98,14 @@ void construct_mat_duels_d(t_mat_char_star_dyn tabmots,t_mat_int_dyn *duels_mat,
   int nombreVotant = tabmots.nbRows-1;
   int somme_vote_x_superieur_y = 0;
 
-  for (size_t x = 0; x < nbCandidats; x++) {
-    for (size_t y = 0; y < nbCandidats; y++) {
+  for (int x = 0; x < nbCandidats; x++) {
+    for (int y = 0; y < nbCandidats; y++) {
       if(x != y){
-        for (size_t i_ligne = 1; i_ligne < nombreVotant; i_ligne++) {
-          if(atoi(tabmots.tab[i_ligne][x + tabmots.offset]) > atoi(tabmots.tab[i_ligne][y + tabmots.offset]))
+        for (int i_ligne = 1; i_ligne < nombreVotant; i_ligne++) {
+          if(atoi(tabmots.tab[i_ligne][x + tabmots.offset]) < atoi(tabmots.tab[i_ligne][y + tabmots.offset]) && atoi(tabmots.tab[i_ligne][x + tabmots.offset]) <= 10 && atoi(tabmots.tab[i_ligne][x + tabmots.offset]) >= 0){
             somme_vote_x_superieur_y++;
+          }
+
         }
         duels_mat->tab[x][y] = somme_vote_x_superieur_y;
         somme_vote_x_superieur_y = 0;
@@ -134,7 +140,7 @@ t_tab_int_dyn creer_vote_par_candidat(t_mat_char_star_dyn tabmots, int nombreCan
 
       // les votes sont compris entre 1 et 10 sinon c'est considéré comme vote nul
       // on cherche tous les minimum de la ligne parce qu'il peut y avoir des ex equo
-      if (atoi(tabmots.tab[i_ligne][i_colonne]) == minimum_ligne(tabmots, nombreCandidat, i_ligne) && atoi(tabmots.tab[i_ligne][i_colonne]) >=1 && atoi(tabmots.tab[i_ligne][i_colonne]) <= 10){
+      if (atoi(tabmots.tab[i_ligne][i_colonne]) == minimum_ligne(tabmots, nombreCandidat, i_ligne)){
         candidats_classement.tab[i_colonne-tabmots.offset]++;
       }
     }

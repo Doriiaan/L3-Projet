@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>C Projet L2S1: Référence du fichier /home/dorian/Documents/Projet/code/utils.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">C Projet L2S1<span id="projectnumber">&#160;1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_050edd66366d13764f98250ef6db77f6.html">code</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle"><div class="title">Référence du fichier utils.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichier contenant les fonctions de bases utiles pour toute sorte de fonction <br  />
+exemple : fonction copier_chaine_char.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="global_8h_source.html">fichiers_h/global.h</a>&quot;</code><br />
+<code>#include &quot;fichiers_h/utils.h&quot;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a99211900ea59d15a5ad9bf8dabd72929"><td class="memItemLeft" align="right" valign="top"><a id="a99211900ea59d15a5ad9bf8dabd72929" name="a99211900ea59d15a5ad9bf8dabd72929"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>erreur</b> (char *message)</td></tr>
+<tr class="memdesc:a99211900ea59d15a5ad9bf8dabd72929"><td class="mdescLeft">&#160;</td><td class="mdescRight">ecrit un message d'erreur et quitte le programme <br /></td></tr>
+<tr class="separator:a99211900ea59d15a5ad9bf8dabd72929"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41b47a3fd48bac1179fb62b95165a179"><td class="memItemLeft" align="right" valign="top"><a id="a41b47a3fd48bac1179fb62b95165a179" name="a41b47a3fd48bac1179fb62b95165a179"></a>
+int *&#160;</td><td class="memItemRight" valign="bottom"><b>creer_tab_int</b> (int dim)</td></tr>
+<tr class="memdesc:a41b47a3fd48bac1179fb62b95165a179"><td class="mdescLeft">&#160;</td><td class="mdescRight">creer un tableau dynamique de int <br /></td></tr>
+<tr class="separator:a41b47a3fd48bac1179fb62b95165a179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7eabe8ded28a70303e309b31a28ab0"><td class="memItemLeft" align="right" valign="top"><a id="afb7eabe8ded28a70303e309b31a28ab0" name="afb7eabe8ded28a70303e309b31a28ab0"></a>
+int **&#160;</td><td class="memItemRight" valign="bottom"><b>creer_mat_int</b> (int nbRows, int nbCol)</td></tr>
+<tr class="memdesc:afb7eabe8ded28a70303e309b31a28ab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">creer une matrice dynamique de int <br /></td></tr>
+<tr class="separator:afb7eabe8ded28a70303e309b31a28ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7f3dc0198ba99b93d8b1a2be3acc798"><td class="memItemLeft" align="right" valign="top"><a id="ac7f3dc0198ba99b93d8b1a2be3acc798" name="ac7f3dc0198ba99b93d8b1a2be3acc798"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>affiche_tab_int</b> (int *tab, int dim, FILE *outfp)</td></tr>
+<tr class="memdesc:ac7f3dc0198ba99b93d8b1a2be3acc798"><td class="mdescLeft">&#160;</td><td class="mdescRight">affiche un tableau de int sur la sortie outfp <br /></td></tr>
+<tr class="separator:ac7f3dc0198ba99b93d8b1a2be3acc798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70e43b594118ace6c985d42135438623"><td class="memItemLeft" align="right" valign="top"><a id="a70e43b594118ace6c985d42135438623" name="a70e43b594118ace6c985d42135438623"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>affiche_mat_int</b> (int **duels_mat, int nbRows, int nbCol, FILE *outfp)</td></tr>
+<tr class="memdesc:a70e43b594118ace6c985d42135438623"><td class="mdescLeft">&#160;</td><td class="mdescRight">affiche une matrice de int sur la sortie outfp <br /></td></tr>
+<tr class="separator:a70e43b594118ace6c985d42135438623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a941a572f313edd85907218084b61371a"><td class="memItemLeft" align="right" valign="top"><a id="a941a572f313edd85907218084b61371a" name="a941a572f313edd85907218084b61371a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_tab_int</b> (int *tab, int dim, int valeur)</td></tr>
+<tr class="memdesc:a941a572f313edd85907218084b61371a"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise un tableau de int avec une valeur <br /></td></tr>
+<tr class="separator:a941a572f313edd85907218084b61371a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48718f42e674f032d418d56d9586a2bf"><td class="memItemLeft" align="right" valign="top"><a id="a48718f42e674f032d418d56d9586a2bf" name="a48718f42e674f032d418d56d9586a2bf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_mat_int</b> (int **mat, int nbRows, int nbCol, int valeur)</td></tr>
+<tr class="memdesc:a48718f42e674f032d418d56d9586a2bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise une matrice de int avec une valeur <br /></td></tr>
+<tr class="separator:a48718f42e674f032d418d56d9586a2bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d5f77ed04efb9fb061d676fb696f25"><td class="memItemLeft" align="right" valign="top"><a id="a22d5f77ed04efb9fb061d676fb696f25" name="a22d5f77ed04efb9fb061d676fb696f25"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_tab_indice</b> (int *tab, int dim)</td></tr>
+<tr class="memdesc:a22d5f77ed04efb9fb061d676fb696f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">renvoie l'indice de la valeur maximale dans un tableau <br /></td></tr>
+<tr class="separator:a22d5f77ed04efb9fb061d676fb696f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dccfc0149611dcac3fb04dc45023150"><td class="memItemLeft" align="right" valign="top"><a id="a4dccfc0149611dcac3fb04dc45023150" name="a4dccfc0149611dcac3fb04dc45023150"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>min_tab_indice_non_j</b> (int *tab, int dim, int j)</td></tr>
+<tr class="memdesc:a4dccfc0149611dcac3fb04dc45023150"><td class="mdescLeft">&#160;</td><td class="mdescRight">renvoie l'indice de la valeur minimale dans un tableau qui n'est pas d'indice j <br /></td></tr>
+<tr class="separator:a4dccfc0149611dcac3fb04dc45023150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4c296adb52aa81c3889c3880b7bcff2"><td class="memItemLeft" align="right" valign="top"><a id="ae4c296adb52aa81c3889c3880b7bcff2" name="ae4c296adb52aa81c3889c3880b7bcff2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>creer_t_tab_int_dyn</b> (<a class="el" href="structs__tab__dyn.html">t_tab_int_dyn</a> *stTab, int dim)</td></tr>
+<tr class="memdesc:ae4c296adb52aa81c3889c3880b7bcff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">creer une variable t_tab_int_dyn grace a la fonction creer_tab_int <br /></td></tr>
+<tr class="separator:ae4c296adb52aa81c3889c3880b7bcff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72eaf01807f248f44d7afdc1f9055b7c"><td class="memItemLeft" align="right" valign="top"><a id="a72eaf01807f248f44d7afdc1f9055b7c" name="a72eaf01807f248f44d7afdc1f9055b7c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>creer_t_mat_int_dyn</b> (<a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> *stTab, int nbRows, int nbCol)</td></tr>
+<tr class="memdesc:a72eaf01807f248f44d7afdc1f9055b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">creer une variable t_mat_int_dyn grace a la fonction creer_mat_int <br /></td></tr>
+<tr class="separator:a72eaf01807f248f44d7afdc1f9055b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc7ce49692349962614d37b169415619"><td class="memItemLeft" align="right" valign="top"><a id="afc7ce49692349962614d37b169415619" name="afc7ce49692349962614d37b169415619"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>creer_t_mat_char_dyn</b> (<a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> *s_tabmots)</td></tr>
+<tr class="memdesc:afc7ce49692349962614d37b169415619"><td class="mdescLeft">&#160;</td><td class="mdescRight">creer une variable t_mat_char_star_dyn, initialise sa matrice de 3 dimensions dynamiquement <br /></td></tr>
+<tr class="separator:afc7ce49692349962614d37b169415619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af99766fcac66273c7302905dddeeee97"><td class="memItemLeft" align="right" valign="top"><a id="af99766fcac66273c7302905dddeeee97" name="af99766fcac66273c7302905dddeeee97"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>affiche_t_mat_char_star_dyn</b> (<a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> t_tabmots, FILE *outfp)</td></tr>
+<tr class="memdesc:af99766fcac66273c7302905dddeeee97"><td class="mdescLeft">&#160;</td><td class="mdescRight">affiche une matrice de chaine de caractere, le tableau csv ici <br /></td></tr>
+<tr class="separator:af99766fcac66273c7302905dddeeee97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3209b431958b8dc4f1212ab43e7d94a6"><td class="memItemLeft" align="right" valign="top"><a id="a3209b431958b8dc4f1212ab43e7d94a6" name="a3209b431958b8dc4f1212ab43e7d94a6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>affiche_t_mat_int_dyn</b> (<a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> t_tab, FILE *outfp)</td></tr>
+<tr class="memdesc:a3209b431958b8dc4f1212ab43e7d94a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">affiche une matrice de int <br /></td></tr>
+<tr class="separator:a3209b431958b8dc4f1212ab43e7d94a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf5dab935c0377626198c7e4a380da8e"><td class="memItemLeft" align="right" valign="top"><a id="acf5dab935c0377626198c7e4a380da8e" name="acf5dab935c0377626198c7e4a380da8e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>affiche_t_tab_int_dyn</b> (<a class="el" href="structs__tab__dyn.html">t_tab_int_dyn</a> t_tab, FILE *outfp)</td></tr>
+<tr class="memdesc:acf5dab935c0377626198c7e4a380da8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">affiche un tableau de int <br /></td></tr>
+<tr class="separator:acf5dab935c0377626198c7e4a380da8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab79750f3b565227192078073cbcf808"><td class="memItemLeft" align="right" valign="top"><a id="aab79750f3b565227192078073cbcf808" name="aab79750f3b565227192078073cbcf808"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>copier_chaine_char</b> (char const *source, char *destination)</td></tr>
+<tr class="memdesc:aab79750f3b565227192078073cbcf808"><td class="mdescLeft">&#160;</td><td class="mdescRight">copie une chaine de caractere source dans une chaine de caractere destination <br /></td></tr>
+<tr class="separator:aab79750f3b565227192078073cbcf808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e77d3a23711f3daafcb457f8bd7837f"><td class="memItemLeft" align="right" valign="top"><a id="a6e77d3a23711f3daafcb457f8bd7837f" name="a6e77d3a23711f3daafcb457f8bd7837f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>comparer_chaine_char</b> (char const *source1, char const *source2)</td></tr>
+<tr class="separator:a6e77d3a23711f3daafcb457f8bd7837f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af082905f7eac6d03e92015146bbc1925"><td class="memItemLeft" align="right" valign="top"><a id="af082905f7eac6d03e92015146bbc1925" name="af082905f7eac6d03e92015146bbc1925"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max</b> (int a, int b)</td></tr>
+<tr class="memdesc:af082905f7eac6d03e92015146bbc1925"><td class="mdescLeft">&#160;</td><td class="mdescRight">renvoit le max entre 2 int <br /></td></tr>
+<tr class="separator:af082905f7eac6d03e92015146bbc1925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd8bbcfabb3ddef2ccaafb9928a37b95"><td class="memItemLeft" align="right" valign="top"><a id="abd8bbcfabb3ddef2ccaafb9928a37b95" name="abd8bbcfabb3ddef2ccaafb9928a37b95"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>min</b> (int a, int b)</td></tr>
+<tr class="memdesc:abd8bbcfabb3ddef2ccaafb9928a37b95"><td class="mdescLeft">&#160;</td><td class="mdescRight">renvoit le min entre 2 int <br /></td></tr>
+<tr class="separator:abd8bbcfabb3ddef2ccaafb9928a37b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72b2c01363cabfaa53a24999083121c5"><td class="memItemLeft" align="right" valign="top"><a id="a72b2c01363cabfaa53a24999083121c5" name="a72b2c01363cabfaa53a24999083121c5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>verifier_fichier_txt</b> (const char *nom_de_fichier)</td></tr>
+<tr class="memdesc:a72b2c01363cabfaa53a24999083121c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">verifie si le fichier correspondant est a une extension .txt <br /></td></tr>
+<tr class="separator:a72b2c01363cabfaa53a24999083121c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p >Fichier contenant les fonctions de bases utiles pour toute sorte de fonction <br  />
+exemple : fonction copier_chaine_char. </p>
+<dl class="section author"><dt>Auteur</dt><dd>ALARY Dorian </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Janvier 2022 </dd></dl>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

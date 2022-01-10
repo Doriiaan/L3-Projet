@@ -12,7 +12,7 @@ all : $(EXEC)
 $(EXEC) : $(OBJ)
 	$(CC) $(CFLAGS) -o $(EXEC) $(OBJ)
 
-#Compile tous les fichiers .c en ficher .c
+#Compile tous les fichiers .c en ficher .o
 %.o : %.c
 	$(CC) -c $(SRC)
 

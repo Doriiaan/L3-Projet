@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>C Projet L2S1:  Fichier source de /home/dorian/Documents/Projet/code/fichiers_h/utils_scrutins.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">C Projet L2S1<span id="projectnumber">&#160;1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_050edd66366d13764f98250ef6db77f6.html">code</a></li><li class="navelem"><a class="el" href="dir_086555e9e55402c2540db06b0d20de4b.html">fichiers_h</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">utils_scrutins.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//methode de scrutins</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keywordtype">void</span> uninominal_un_tour(<a class="code hl_struct" href="structs__tab__dyn.html">t_tab_int_dyn</a> vote_par_candidat, <a class="code hl_struct" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots,FILE *outfp);</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keywordtype">void</span> uninominal_deux_tours(<a class="code hl_struct" href="structs__tab__dyn.html">t_tab_int_dyn</a> vote_par_candidat, <a class="code hl_struct" href="structs__mat__dyn.html">t_mat_int_dyn</a> duels_mat, <a class="code hl_struct" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, FILE *outfp);</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keywordtype">int</span> minimax(<a class="code hl_struct" href="structs__mat__dyn.html">t_mat_int_dyn</a> duels_mat, <a class="code hl_struct" href="structliste.html">liste</a> larcs, <span class="keywordtype">int</span> nbSommets,FILE *outfp);</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><a class="code hl_struct" href="structs__tab__dyn.html">t_tab_int_dyn</a> schulze(<a class="code hl_struct" href="structs__mat__dyn.html">t_mat_int_dyn</a> duels_mat, <a class="code hl_struct" href="structliste.html">liste</a> larcs, <span class="keywordtype">int</span> nbSommets, FILE *outfp);</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//fontions pour aider les methodes de scrutins</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><a class="code hl_struct" href="structs__tab__dyn.html">t_tab_int_dyn</a> creer_vote_par_candidat(<a class="code hl_struct" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, <span class="keywordtype">int</span> nombreCandidat);</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keywordtype">void</span> affiche_resultat(FILE *outfp,<span class="keywordtype">char</span> * scrutin,<span class="keywordtype">int</span> nbCandidats, <span class="keywordtype">int</span> nbVotants ,<span class="keywordtype">float</span> score,<span class="keywordtype">char</span> * vainqueur);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> copie_tabmots_duels_mat(<a class="code hl_struct" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, <a class="code hl_struct" href="structs__mat__dyn.html">t_mat_int_dyn</a> *duels_mat, <span class="keywordtype">int</span> nbCandidats);</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">int</span> creer_liste_arc_etiquette(<a class="code hl_struct" href="structliste.html">liste</a> *liste_arc, <a class="code hl_struct" href="structs__mat__dyn.html">t_mat_int_dyn</a> duels_mat);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">int</span> creer_liste_arc_pondere(<a class="code hl_struct" href="structliste.html">liste</a> *liste_arc, <a class="code hl_struct" href="structs__mat__dyn.html">t_mat_int_dyn</a> duels_mat);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">int</span> minimum_ligne(<a class="code hl_struct" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, <span class="keywordtype">int</span> nombreCandidat, <span class="keywordtype">int</span> i_ligne);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keywordtype">void</span> creer_mat_force_du_plus_fort_chemin(<a class="code hl_struct" href="structs__mat__dyn.html">t_mat_int_dyn</a> *p, <a class="code hl_struct" href="structs__mat__dyn.html">t_mat_int_dyn</a> duels_mat);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">void</span> creer_ensemble_gagnants_potentiels(<a class="code hl_struct" href="structs__tab__dyn.html">t_tab_int_dyn</a> *ensemble_gagnants_potentiels, <a class="code hl_struct" href="structs__mat__dyn.html">t_mat_int_dyn</a> p);</div>
+<div class="ttc" id="astructliste_html"><div class="ttname"><a href="structliste.html">liste</a></div><div class="ttdef"><b>Definition:</b> liste.h:15</div></div>
+<div class="ttc" id="astructs__mat__char__dyn_html"><div class="ttname"><a href="structs__mat__char__dyn.html">s_mat_char_dyn</a></div><div class="ttdef"><b>Definition:</b> global.h:49</div></div>
+<div class="ttc" id="astructs__mat__dyn_html"><div class="ttname"><a href="structs__mat__dyn.html">s_mat_dyn</a></div><div class="ttdef"><b>Definition:</b> global.h:42</div></div>
+<div class="ttc" id="astructs__tab__dyn_html"><div class="ttname"><a href="structs__tab__dyn.html">s_tab_dyn</a></div><div class="ttdef"><b>Definition:</b> global.h:37</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

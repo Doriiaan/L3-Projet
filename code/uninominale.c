@@ -2,6 +2,7 @@
 #include "fichiers_h/utils_scrutins.h"
 #include "fichiers_h/utils.h"
 
+
 void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tabmots, FILE *outfp){
 
   fprintf(outfp, "\n\n-------------------------------------\n");
@@ -18,7 +19,6 @@ void uninominal_un_tour(t_tab_int_dyn vote_par_candidat, t_mat_char_star_dyn tab
     taille *= 2;
     nom_vainqueur = (char*) realloc(nom_vainqueur, taille*sizeof(char));
   }
-
 
   float score = ((float)(vote_par_candidat.tab[indice_vainqueur]) / (float)(nombreVotant)) * 100;
   copier_chaine_char(tabmots.tab[0][indice_vainqueur+tabmots.offset], nom_vainqueur);
@@ -38,7 +38,6 @@ void uninominal_deux_tours(t_tab_int_dyn vote_par_candidat, t_mat_int_dyn duels_
 
   // chercher le nom du vainqueur
   int indice_vainqueur1 = max_tab_indice(vote_par_candidat.tab, vote_par_candidat.dim);
-
   int indice_vainqueur2 = 0;
   if(indice_vainqueur1 == 0)
     indice_vainqueur2 = 1;

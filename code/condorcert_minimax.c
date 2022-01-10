@@ -2,24 +2,9 @@
 #include "fichiers_h/utils.h"
 #include "fichiers_h/utils_scrutins.h"
 
-/*
-struct liste {
-    Elementliste Tabliste[DIMMAX];
-    int Tete;
-    int nbElt;
-};
-
-typedef struct s_arc_p{ /// arc pondéré = arc de préférence
-  int orig;
-  int dest;
-  int poids;
-} t_arc_p;
-
-
-*/
 
 int minimax(t_mat_int_dyn duels_mat, liste larcs, int nbSommets,FILE *outfp){
-  
+
   fprintf(outfp, "\n\n-------------------------------------\n");
   fprintf(outfp, "----------CONDORCET MINIMAX----------\n");
   fprintf(outfp, "-------------------------------------\n");

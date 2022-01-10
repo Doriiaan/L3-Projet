@@ -1,1 +1,0 @@
-long fact(int n);

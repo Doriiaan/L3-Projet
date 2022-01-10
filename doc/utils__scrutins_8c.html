@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>C Projet L2S1: Référence du fichier /home/dorian/Documents/Projet/code/utils_scrutins.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">C Projet L2S1<span id="projectnumber">&#160;1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_050edd66366d13764f98250ef6db77f6.html">code</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle"><div class="title">Référence du fichier utils_scrutins.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichier contenant les fonctions utiles pour les fonctions de scrutins <br  />
+exemple : vainqueurCondorcet.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="global_8h_source.html">fichiers_h/global.h</a>&quot;</code><br />
+<code>#include &quot;fichiers_h/utils.h&quot;</code><br />
+<code>#include &quot;fichiers_h/utils_scrutins.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a43427a805ded4b0d0a0f15cc92758a51"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__scrutins_8c.html#a43427a805ded4b0d0a0f15cc92758a51">vainqueurCondorcet</a> (<a class="el" href="structliste.html">liste</a> larcs, int nbSommets)</td></tr>
+<tr class="memdesc:a43427a805ded4b0d0a0f15cc92758a51"><td class="mdescLeft">&#160;</td><td class="mdescRight">renvoie l'indice du vainqueur de Condorcet s'il y en a un sinon renvoie -1  <a href="utils__scrutins_8c.html#a43427a805ded4b0d0a0f15cc92758a51">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a43427a805ded4b0d0a0f15cc92758a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a226fd3dc8841973de10745419785b65a"><td class="memItemLeft" align="right" valign="top"><a id="a226fd3dc8841973de10745419785b65a" name="a226fd3dc8841973de10745419785b65a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>creer_liste_arc_etiquette</b> (<a class="el" href="structliste.html">liste</a> *liste_arc, <a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> duels_mat)</td></tr>
+<tr class="separator:a226fd3dc8841973de10745419785b65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac7ee71bf70b10af04f30a4bf78ac53"><td class="memItemLeft" align="right" valign="top"><a id="a7ac7ee71bf70b10af04f30a4bf78ac53" name="a7ac7ee71bf70b10af04f30a4bf78ac53"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>creer_liste_arc_pondere</b> (<a class="el" href="structliste.html">liste</a> *liste_arc, <a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> duels_mat)</td></tr>
+<tr class="separator:a7ac7ee71bf70b10af04f30a4bf78ac53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ffa8998b4ee0b956dad3498bc736de9"><td class="memItemLeft" align="right" valign="top"><a id="a0ffa8998b4ee0b956dad3498bc736de9" name="a0ffa8998b4ee0b956dad3498bc736de9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>construct_mat_duels_d</b> (<a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, <a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> *duels_mat, int nbCandidats, FILE *outfp)</td></tr>
+<tr class="separator:a0ffa8998b4ee0b956dad3498bc736de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d37150ca33dfe12b7ee21fb28610e9e"><td class="memItemLeft" align="right" valign="top"><a id="a8d37150ca33dfe12b7ee21fb28610e9e" name="a8d37150ca33dfe12b7ee21fb28610e9e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>copie_tabmots_duels_mat</b> (<a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, <a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> *duels_mat, int nbCandidats)</td></tr>
+<tr class="separator:a8d37150ca33dfe12b7ee21fb28610e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad26f55d29293549b0da492c1066f91bb"><td class="memItemLeft" align="right" valign="top"><a id="ad26f55d29293549b0da492c1066f91bb" name="ad26f55d29293549b0da492c1066f91bb"></a>
+<a class="el" href="structs__tab__dyn.html">t_tab_int_dyn</a>&#160;</td><td class="memItemRight" valign="bottom"><b>creer_vote_par_candidat</b> (<a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, int nombreCandidat)</td></tr>
+<tr class="separator:ad26f55d29293549b0da492c1066f91bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab618f9f495bb9391b635ca0f3eb39190"><td class="memItemLeft" align="right" valign="top"><a id="ab618f9f495bb9391b635ca0f3eb39190" name="ab618f9f495bb9391b635ca0f3eb39190"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>affiche_resultat</b> (FILE *outfp, char *scrutin, int nbCandidats, int nbVotants, float score, char *vainqueur)</td></tr>
+<tr class="separator:ab618f9f495bb9391b635ca0f3eb39190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bec59e4ef47d499e8bb77a47cfb9e80"><td class="memItemLeft" align="right" valign="top"><a id="a9bec59e4ef47d499e8bb77a47cfb9e80" name="a9bec59e4ef47d499e8bb77a47cfb9e80"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>minimum_ligne</b> (<a class="el" href="structs__mat__char__dyn.html">t_mat_char_star_dyn</a> tabmots, int nombreCandidat, int i_ligne)</td></tr>
+<tr class="separator:a9bec59e4ef47d499e8bb77a47cfb9e80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a564754fe225b4d1db63d81348a494acd"><td class="memItemLeft" align="right" valign="top"><a id="a564754fe225b4d1db63d81348a494acd" name="a564754fe225b4d1db63d81348a494acd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>creer_mat_force_du_plus_fort_chemin</b> (<a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> *p, <a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> duels_mat)</td></tr>
+<tr class="separator:a564754fe225b4d1db63d81348a494acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea8c55108494f870da1f4b48e6938e31"><td class="memItemLeft" align="right" valign="top"><a id="aea8c55108494f870da1f4b48e6938e31" name="aea8c55108494f870da1f4b48e6938e31"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>creer_ensemble_gagnants_potentiels</b> (<a class="el" href="structs__tab__dyn.html">t_tab_int_dyn</a> *ensemble_gagnants_potentiels, <a class="el" href="structs__mat__dyn.html">t_mat_int_dyn</a> p)</td></tr>
+<tr class="separator:aea8c55108494f870da1f4b48e6938e31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p >Fichier contenant les fonctions utiles pour les fonctions de scrutins <br  />
+exemple : vainqueurCondorcet. </p>
+<dl class="section author"><dt>Auteur</dt><dd>ALARY Dorian </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Janvier 2022 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a43427a805ded4b0d0a0f15cc92758a51" name="a43427a805ded4b0d0a0f15cc92758a51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43427a805ded4b0d0a0f15cc92758a51">&#9670;&nbsp;</a></span>vainqueurCondorcet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int vainqueurCondorcet </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structliste.html">liste</a>&#160;</td>
+          <td class="paramname"><em>larcs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nbSommets</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>renvoie l'indice du vainqueur de Condorcet s'il y en a un sinon renvoie -1 </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">liste</td><td>liste des arcs </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">int</td><td>indice vainqueur de condorcet ou -1 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>
